@@ -11,6 +11,7 @@ std::optional<char> valueInCharTbl(char const* char_tbl, size_t rows, size_t col
 int main()
 {
 	return 0;
+
 }
 
 
