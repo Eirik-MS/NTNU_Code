@@ -5,3 +5,4 @@
 temp/
 .vscode/
 .vs/
+*.db
