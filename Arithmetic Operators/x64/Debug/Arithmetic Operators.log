@@ -1,0 +1,4 @@
+﻿  Arithmetic Operators.cpp
+C:\Users\Eirik Mathias\Google Drive\Universitet\DTE-2600 C++\Arithmetic Operators\Arithmetic Operators.cpp(29,19): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Eirik Mathias\Google Drive\Universitet\DTE-2600 C++\Arithmetic Operators\Arithmetic Operators.cpp(33,13): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  Arithmetic Operators.vcxproj -> C:\Users\Eirik Mathias\Google Drive\Universitet\DTE-2600 C++\DTE-2600\x64\Debug\Arithmetic Operators.exe
