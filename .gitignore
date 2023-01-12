@@ -5,6 +5,7 @@
 temp/
 .vscode/
 .vs/
+
 *.db
 DTE-2600/.vs/The Basics/v17/.suo
 *.db
