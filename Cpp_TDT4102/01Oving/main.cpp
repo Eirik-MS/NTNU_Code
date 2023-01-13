@@ -4,7 +4,8 @@
 //
 // This program outputs the message "Hello, World!" to the monitor
 
-#include "std_lib_facilities.h"
+#include "subprojects\std_lib_facilities\std_lib_facilities.h"
+
 
 //------------------------------------------------------------------------------'
 
@@ -23,18 +24,21 @@ int fibonacci(int n){
     int b = 1;
     cout << "Fibonacci sequence: " << endl;
     for (int i = 0; i < n; i++) {
-        cout << a << endl;
+        cout << a <<" "<< i << endl;
         int temp = b;
         b += a;
         a = temp;
     }
+    return a;
 }
 
 int squareNumberSum(int n){
     int totalSum = 0;
     for (int i = 1; i <= n; i++) {
         totalSum += i*i;
+        cout << i*i << endl;
     }
+    cout << totalSum << endl;
     return totalSum;
 }
 
@@ -63,7 +67,7 @@ bool isPrime (int n){
 void naivePrimeNumberSearch(int n){
     for (int i =2; i < n; i++) {
         if (isPrime(i)) {
-            cout << i << "is a Prime" << endl;
+            cout << i << " is a Prime" << endl;
         }
     }
 }
@@ -74,7 +78,7 @@ int findGreatestDivisor(int n){
             return i;
         }
     }
-    return 0;
+    return 1;
 }
 
 // C++ programs start by executing the function main
@@ -82,6 +86,22 @@ int main() {
     // Show a nice message in the Terminal window
     cout << "Oppgave a)" << endl;
     cout << maxOfTwo(5, 6) << endl;
+
+    cout << "Oppgave c)" << endl;
+    cout << fibonacci(5) << endl;
+
+    cout << "Oppgave d)" << endl;
+    cout << squareNumberSum(5) << endl;
+
+    cout << "Oppgave e)" << endl;
+    triangleNumbersBelow(10);
+
+    cout << "Oppgave f og g)" << endl;
+    naivePrimeNumberSearch(14);
+
+    cout << "Oppgave h)" << endl;
+    cout << findGreatestDivisor(14) << endl;
+    cout << findGreatestDivisor(13) << endl;
 
     // This lets the operating system (Windows, Mac, Linux, etc.) know that the program
     // did not encounter any errors
