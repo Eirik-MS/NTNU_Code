@@ -18,15 +18,7 @@ animationwindow_dep = dependency('animationwindow', fallback: ['animationwindow'
 # std_lib_facilities_dep = dependency('std_lib_facilities', fallback: ['std_lib_facilities', 'std_lib_facilities_dep'])
 
 
-src = []
+src = ['main.cpp']
 
-exe = executable(
-  'program',
-  src,
-'main.cpp',
-'oppgave1.cpp',
-'oppgave2.cpp',
-  dependencies : [animationwindow_dep, sdl2_dep],
-  cpp_args : ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type']
-)
+exe = executable('program', src, dependencies : [animationwindow_dep, sdl2_dep], cpp_args : ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type'])
 # exe = executable('program', src, dependencies : [animationwindow_dep, sdl2_dep, ], cpp_args : '-Wconversion')

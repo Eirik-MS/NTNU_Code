@@ -9,5 +9,4 @@ int inputInteger();
 void inputIntegersAndPrintSum();
 bool isOdd(int x);
 void printHumanReadableTime(int seconds);
-int menu1();
 

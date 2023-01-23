@@ -1,5 +1,5 @@
 
-#include "std_lib_facilities.h"
+#include "oppgave2.h"
 
 
 
@@ -46,7 +46,32 @@ double inputDouble(){
 }
 
 
-double NOKtoEUR(double NOK){
+double NOKtoEUR(){
+    //får ikke desimaltall hvis jeg bruker inputDouble()
+    double NOK = inputDouble();
+    if (NOK < 0)
+    {
+        cout << "Du kan ikke skrive inn et negativt tall!" << endl;
+        NOKtoEUR();
+        return 0;
+    }
     double EUR = NOK * 0.11;
+    cout << "Beløpet i EUR er: " << fixed << setprecision(2) << EUR << endl;
     return EUR;
+}
+
+void ganngetabell(){
+    int sizeHorizontal;
+    int sizeVertical;
+    cout << "Skriv inn størrelsen på tabellen: ";
+    cin >> sizeHorizontal;
+    cin >> sizeVertical;
+    for (int i = 1; i <= sizeHorizontal; i++)
+    {
+        for (int j = 1; j <= sizeVertical; j++)
+        {
+            cout << i*j << "\t";
+        }
+        cout << endl;
+    }
 }

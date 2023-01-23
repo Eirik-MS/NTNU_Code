@@ -5,3 +5,5 @@
 int sumOfManyInt();
 int sumOfManyInt2();
 double inputDouble();
+double NOKtoEUR();
+void ganngetabell();
