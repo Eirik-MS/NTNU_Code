@@ -4,7 +4,8 @@
 //
 // This program outputs the message "Hello, World!" to the monitor
 
-#include "subprojects\std_lib_facilities\std_lib_facilities.h"
+#include "std_lib_facilities.h"
+
 
 
 //------------------------------------------------------------------------------'
@@ -30,6 +31,15 @@ int fibonacci(int n){
         a = temp;
     }
     return a;
+}
+
+int addition(){
+    int a = 0;
+    int b = 0;
+    cout << "Enter two numbers to add: " << endl;
+    cin >> a >> b;
+    cout << "The sum of " << a << " and " << b << " is " << a+b << endl;
+    return a + b;
 }
 
 int squareNumberSum(int n){
@@ -83,26 +93,27 @@ int findGreatestDivisor(int n){
 
 // C++ programs start by executing the function main
 int main() {
+    int a = addition();
     // Show a nice message in the Terminal window
-    cout << "Oppgave a)" << endl;
-    cout << maxOfTwo(5, 6) << endl;
-
-    cout << "Oppgave c)" << endl;
-    cout << fibonacci(5) << endl;
-
-    cout << "Oppgave d)" << endl;
-    cout << squareNumberSum(5) << endl;
-
-    cout << "Oppgave e)" << endl;
-    triangleNumbersBelow(10);
-
-    cout << "Oppgave f og g)" << endl;
-    naivePrimeNumberSearch(14);
-
-    cout << "Oppgave h)" << endl;
-    cout << findGreatestDivisor(14) << endl;
-    cout << findGreatestDivisor(13) << endl;
-
+    //cout << "Oppgave a)" << endl;
+    //cout << maxOfTwo(5, 6) << endl;
+//
+    //cout << "Oppgave c)" << endl;
+    //cout << fibonacci(5) << endl;
+//
+    //cout << "Oppgave d)" << endl;
+    //cout << squareNumberSum(5) << endl;
+//
+    //cout << "Oppgave e)" << endl;
+    //triangleNumbersBelow(10);
+//
+    //cout << "Oppgave f og g)" << endl;
+    //naivePrimeNumberSearch(14);
+//
+    //cout << "Oppgave h)" << endl;
+    //cout << findGreatestDivisor(14) << endl;
+    //cout << findGreatestDivisor(13) << endl;
+//
     // This lets the operating system (Windows, Mac, Linux, etc.) know that the program
     // did not encounter any errors
     return 0;

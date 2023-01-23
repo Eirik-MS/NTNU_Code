@@ -3,3 +3,7 @@ def isFibonacciNumber(n):
     while b < n:
         a, b = b, a+b
     return a == n
+
+
+i = 0
+i += 1
