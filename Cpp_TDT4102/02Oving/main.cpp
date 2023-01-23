@@ -13,7 +13,20 @@
 int main() {
     // Show a nice message in the Terminal window
     cout << "Hello, World!" << endl;
+    int choice;
+    cin >> choice;
+    switch (choice)
+    {
+    case 1:
+        menu1();
+        break;
+    case 2:
+        menu2();
+        break;
 
+    default:
+        break;
+    }
     menu1();
 
     // This lets the operating system (Windows, Mac, Linux, etc.) know that the program

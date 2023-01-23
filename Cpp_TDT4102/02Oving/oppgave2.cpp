@@ -1,6 +1,8 @@
 
 #include "std_lib_facilities.h"
 
+
+
 int sumOfManyInt(){
     cout << "Skriv inn hvor mange heltall som skal summeres: ";
     int amount;
@@ -36,10 +38,15 @@ En for løkke er bra når du vet hvor mange ganger du skal gjenta noe.
 Mens en while løkke er en mer åpen løkke som kan gjenta så mange ganger du vil.
 */
 
-int inputDouble(){
+double inputDouble(){
     double x;
     cout << "Skriv inn et desimaltall: ";
     cin >> x;
     return x;
 }
 
+
+double NOKtoEUR(double NOK){
+    double EUR = NOK * 0.11;
+    return EUR;
+}
