@@ -93,28 +93,28 @@ int findGreatestDivisor(int n){
 
 // C++ programs start by executing the function main
 int main() {
-    int a = addition();
+    //int a = addition();
     // Show a nice message in the Terminal window
-    //cout << "Oppgave a)" << endl;
-    //cout << maxOfTwo(5, 6) << endl;
-//
-    //cout << "Oppgave c)" << endl;
-    //cout << fibonacci(5) << endl;
-//
-    //cout << "Oppgave d)" << endl;
-    //cout << squareNumberSum(5) << endl;
-//
-    //cout << "Oppgave e)" << endl;
-    //triangleNumbersBelow(10);
-//
-    //cout << "Oppgave f og g)" << endl;
-    //naivePrimeNumberSearch(14);
-//
-    //cout << "Oppgave h)" << endl;
-    //cout << findGreatestDivisor(14) << endl;
-    //cout << findGreatestDivisor(13) << endl;
-//
-    // This lets the operating system (Windows, Mac, Linux, etc.) know that the program
+    cout << "Oppgave a)" << endl;
+    cout << maxOfTwo(5, 6) << endl;
+
+    cout << "Oppgave c)" << endl;
+    cout << fibonacci(5) << endl;
+
+    cout << "Oppgave d)" << endl;
+    cout << squareNumberSum(5) << endl;
+
+    cout << "Oppgave e)" << endl;
+    triangleNumbersBelow(10);
+
+    cout << "Oppgave f og g)" << endl;
+    naivePrimeNumberSearch(14);
+
+    cout << "Oppgave h)" << endl;
+    cout << findGreatestDivisor(14) << endl;
+    cout << findGreatestDivisor(13) << endl;
+
+     //This lets the operating system (Windows, Mac, Linux, etc.) know that the program
     // did not encounter any errors
     return 0;
 }

@@ -19,6 +19,7 @@ int sumOfManyInt(){
 }
 
 int sumOfManyInt2(){
+    cout << "Skriv inn tallene som skal summeres og avslutt med 0: ";
     int sum = 0;
     int number;
     while (cin >> number)

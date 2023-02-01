@@ -10,11 +10,8 @@
 //------------------------------------------------------------------------------
 // This is the entry point for the program
 void inputIntegersAndPrintProduct() {
-    int x = 0;
-    int y = 0;
-    cout << "Skriv inn to heltall: ";
-    cin >> x;
-    cin >> y;
+    int x = inputInteger();
+    int y = inputInteger();
     int product = x * y;
     cout << x << " * " << y << " = " << product << endl;
 }

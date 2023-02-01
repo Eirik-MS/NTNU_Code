@@ -24,11 +24,7 @@ exe = executable(
   'program',
   src,
 'main.cpp',
-'oppgave1.cpp',
-'oppgave2.cpp',
-'oppgave3.cpp',
-'oppgave4.cpp',
-'oppgave5.cpp',
+'cannonball.cpp',
   dependencies : [animationwindow_dep, sdl2_dep],
   cpp_args : ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type', '-fcolor-diagnostics', '-fansi-escape-codes']
 )
