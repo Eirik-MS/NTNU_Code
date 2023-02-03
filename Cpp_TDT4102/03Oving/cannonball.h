@@ -1,4 +1,6 @@
 #include "std_lib_facilities.h"
+
+
 double acclY();
 double velY(double initVelocityY, double time);
 double posX(double initVelocity, double time, double initPosition);
