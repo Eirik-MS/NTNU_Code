@@ -18,13 +18,19 @@ animationwindow_dep = dependency('animationwindow', fallback: ['animationwindow'
 # std_lib_facilities_dep = dependency('std_lib_facilities', fallback: ['std_lib_facilities', 'std_lib_facilities_dep'])
 
 
+if host_machine.system() == 'linux'
+  compiler_flags = ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type']
+else
+  compiler_flags = ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type', '-fcolor-diagnostics', '-fansi-escape-codes']
+endif
+
 src = []
 
 exe = executable(
   'program',
   src,
-'main.cpp',
 'cannonball.cpp',
+'main.cpp',
   dependencies : [animationwindow_dep, sdl2_dep],
-  cpp_args : ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type', '-fcolor-diagnostics', '-fansi-escape-codes']
+  cpp_args : compiler_flags
 )
