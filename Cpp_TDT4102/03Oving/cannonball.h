@@ -1,4 +1,5 @@
 #include "std_lib_facilities.h"
+#include "utilities.h"
 
 
 double acclY();
@@ -14,3 +15,5 @@ double getVelocityX(double theta, double absVelocity);
 double getVelocityY(double theta, double absVelocity);
 double getDistanceTraveled(double velocityX, double velocityY);
 vector <double> getVelocityVector(double theta, double absVelocity);
+bool checkIfDistanceToTargetIsCorrect(double dist, double speedx, double speedy);
+void playTargetPractice();
