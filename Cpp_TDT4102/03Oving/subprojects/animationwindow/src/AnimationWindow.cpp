@@ -57,12 +57,19 @@ TDT4102::AnimationWindow::AnimationWindow(int x, int y, int width, int height, c
 }
 
 TDT4102::AnimationWindow::~AnimationWindow() {
+    destroy();
+}
+
+void TDT4102::AnimationWindow::destroy() {
     // Free SDL resources depending on how much ended up being initialised in the constructor
     if (rendererHandle != nullptr) {
         SDL_DestroyRenderer(rendererHandle);
     }
     if (windowHandle != nullptr) {
         SDL_DestroyWindow(windowHandle);
+    }
+    if(context != nullptr) {
+        nk_free(context);
     }
 }
 
@@ -143,6 +150,9 @@ void TDT4102::AnimationWindow::wait_for_close() {
     // Free the screenshot when done
     SDL_DestroyTexture(screenTexture);
     SDL_FreeSurface(screenContents);
+
+    // Force close the window
+    destroy();
 }
 
 void TDT4102::AnimationWindow::wait_for(double timeSeconds) {
