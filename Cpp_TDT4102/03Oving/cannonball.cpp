@@ -18,9 +18,10 @@ double posY(double initVelocity, double time, double initPosition) {
 }
 
 void printTime(double time) {
-    int hours = time / 3600;
-    int minutes = (time - hours * 3600) / 60;
-    int seconds = time - hours * 3600 - minutes * 60;
+    cout << "Time: ";
+    int hours = (int) time / 3600;
+    int minutes = (int) (time - hours * 3600) / 60;
+    int seconds = (int) time - hours * 3600 - minutes * 60;
     cout << hours << ":" << minutes << ":" << seconds << endl;
 }
 
@@ -67,4 +68,37 @@ double getDistanceTraveled(double velocityX, double velocityY) {
 
 double targetPractice(double distanceToTarget, double velocityX, double velocityY) {
     return distanceToTarget - getDistanceTraveled(velocityX, velocityY);
+}
+
+bool checkIfDistanceToTargetIsCorrect(double dist, double speedx, double speedy) {
+    double error = targetPractice(dist, speedx, speedy);
+    if (abs(error) < 5) {
+        return true;
+    } else {
+        return false;
+    }    
+}
+
+void playTargetPractice() {
+    int distanceToTarget = randomWithLimits(100, 1000);
+    
+    
+    for (int i = 0; i < 10; i++) {
+        cout << "Distance to target: " << distanceToTarget << endl;
+        double theta = getUserInputTheta();
+        double absVelocity = getUserInputAbsVelocity();
+        vector <double> velocityVector = getVelocityVector(theta, absVelocity);
+        if ( checkIfDistanceToTargetIsCorrect(distanceToTarget, velocityVector[0], velocityVector[1])) {
+            cout << "Hit!, congatulations" << endl;
+            printTime(flightTime(velocityVector[1]));
+            break;1
+        } else {
+            cout << "Missed, you were off by " << targetPractice(distanceToTarget, velocityVector[0], velocityVector[1]) << " meters." << endl;
+            printTime(flightTime(velocityVector[1]));
+        }
+        if (i == 9) {
+            cout << "You have run out of tries, better luck next time." << endl;
+        }
+
+    }
 }

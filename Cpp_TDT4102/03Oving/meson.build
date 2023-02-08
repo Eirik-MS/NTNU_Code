@@ -26,4 +26,12 @@ endif
 
 src = ['main.cpp']
 
-exe = executable('program', src, dependencies : [animationwindow_dep, sdl2_dep], cpp_args : compiler_flags)
+exe = executable(
+  'program',
+  src,
+'cannonball.cpp',
+'utilities.cpp',
+'main.cpp',
+  dependencies : [animationwindow_dep, sdl2_dep],
+  cpp_args : compiler_flags
+)

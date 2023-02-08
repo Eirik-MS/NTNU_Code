@@ -6,6 +6,7 @@
 
 #include "std_lib_facilities.h"
 #include "cannonball.h"
+#include "utilities.h"
 #define MAXERROR 0.01
 
 void testDeviation(double compareOperand, double toOperand, double maxError, string name);
@@ -16,9 +17,7 @@ void testAll();
 // C++ programs start by executing the function main
 int main() {
     // Show a nice message in the Terminal window
-    testAll();
-
-    
+    playTargetPractice();
     // This lets the operating system (Windows, Mac, Linux, etc.) know that the program
     // did not encounter any errors
     return 0;
