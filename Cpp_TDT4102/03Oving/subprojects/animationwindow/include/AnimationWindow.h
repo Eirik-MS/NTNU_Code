@@ -44,6 +44,7 @@ namespace TDT4102 {
         TDT4102::Point getWindowDimensions();
         void startNuklearDraw(TDT4102::Point location, std::string uniqueWindowName, unsigned int width = 0, unsigned int height = 0);
         void endNuklearDraw();
+        void destroy();
 
         // If set to true, new shapes will be drawn on top of the old ones. Can create some neat effects.
         // However, note that GUI elements such as buttons will not draw themselves correctly if you use this.
@@ -60,7 +61,7 @@ namespace TDT4102 {
         SDL_Renderer* rendererHandle = nullptr;
 
         // Nuklear related context
-        nk_context* context;
+        nk_context* context = nullptr;
         TDT4102::internal::FontCache fontCache;
         unsigned int textWindowCounter = 0;
 

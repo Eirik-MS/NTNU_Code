@@ -63,7 +63,7 @@ vector <double> getVelocityVector(double theta, double absVelocity) {
 }
 
 double getDistanceTraveled(double velocityX, double velocityY) {
-    return (velocityX * flightTime(velocityY)) / 2;
+    return (velocityX * flightTime(velocityY));
 }
 
 double targetPractice(double distanceToTarget, double velocityX, double velocityY) {
@@ -91,7 +91,7 @@ void playTargetPractice() {
         if ( checkIfDistanceToTargetIsCorrect(distanceToTarget, velocityVector[0], velocityVector[1])) {
             cout << "Hit!, congatulations" << endl;
             printTime(flightTime(velocityVector[1]));
-            break;1
+            break;
         } else {
             cout << "Missed, you were off by " << targetPractice(distanceToTarget, velocityVector[0], velocityVector[1]) << " meters." << endl;
             printTime(flightTime(velocityVector[1]));
