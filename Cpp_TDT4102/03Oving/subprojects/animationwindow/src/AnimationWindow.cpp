@@ -74,6 +74,9 @@ void TDT4102::AnimationWindow::destroy() {
         nk_free(context);
         context = nullptr;
     }
+    if(context != nullptr) {
+        nk_free(context);
+    }
 }
 
 void TDT4102::AnimationWindow::show_frame() {
