@@ -43,12 +43,12 @@ bool isInProgram(struct Student info, string studie)
 string randomizeString(int len, char lower, char upper)
 {
     int range = upper+1-lower;
-    string result = "";
+    std::string result = "";
     std::random_device rd;
     std::default_random_engine generator(rd());
     
     for(int i=0; i < len; i++){
-        std::uniform_real_distribution<int> distribution(lower,upper);
+        std::uniform_real_distribution<double> distribution(0.0,range-1);
         int number = distribution(generator);
         char r = 'A' + number;
         result += r;
@@ -66,19 +66,13 @@ string readInputToString(int n, char lower, char upper)
         upper = toupper(upper);
     };
 
-
-
     string resultat = "";
-    bool breaker = false;
 
-    while(true)
-    {
         cout<<"Skriv en streng som er "<<n<<" lang, og hvor hver bokstav er mellom "<<lower<<" og "<<upper<<"\n";
         cin>>resultat;
         
         if ((resultat.length() == n) && (std::all_of(resultat.begin(), resultat.end(), [](unsigned char c){return std::isalpha(c);})))
         {
-            int iterations = 0;
             for(int i=0;i<n;++i)
                 {
                     char a = resultat[i];
@@ -90,14 +84,8 @@ string readInputToString(int n, char lower, char upper)
                         {
                             break;
                         }
-                    iterations += 1;
                     //cout<<"a - "<<a<<"; i - "<<i<<"; aNum - "<<aNumber<<"; lNum - "<<lowerNumber<<"; uNum - "<<upperNumber<<"\n";
                 }
-            if (iterations == n){breaker = true;}
-        
-        }
-        //cout<<breaker<<" - breaker\n";
-        if (breaker == true){break;}
     }
     return resultat;
 }
@@ -115,74 +103,47 @@ int countChar(string word, char letter)
     return counter;
 }
 
+int checkCharactersAndPos(string hiddenWord, string guess){
+    int riktigePosisjoner = 0;
+    for (int i =0; i < hiddenWord.length(); i ++){
+        if (hiddenWord[i] == guess[i]){
+            riktigePosisjoner += 1;
+        }
+    }
+    return riktigePosisjoner;
+}
 
-/**
-void playMasterMind()
-{
-    //MastermindWindow mwin{900, 20, 500, 500, 4, "Mastermind"};
 
+void playMasterMind(){
     string hiddenWord = randomizeString(4,'A','F');
+    cout << "Hidden word: "<<hiddenWord<<"\n";
     bool correctGuess = false;
-    cout << "Du spiller nå Master Mind!\n";
+    cout << "Du spiller naa Master Mind!\n";
     int maxForsok = 6;
-    for (int forsok = 0; forsok <= maxForsok; ++forsok)
+    for (int forsok = 0; forsok <= maxForsok; forsok++)
     {
-        cout << "***\nForsøk nr. "<<forsok<<" / "<<maxForsok<<"\n***\n";
-        cout << "Gjør ett gjett.\n";
-        string guess = mwin.getInput(4,'A','F');
+        cout << "***\nForsok nr. "<<forsok<<" / "<<maxForsok<<"\n***\n";
+        cout << "Gjor ett gjett.\n";
+        string guess = readInputToString(4,'A','F');
         int riktigeBokstaver = 0;
         int riktigePosisjoner = 0;
         
-
-        //addGuess(mwin, guess, 'A');
-
-        string hiddenWordReplica = hiddenWord;
-
-        for (int i = 3; i >= 0; --i)
-        {
-            if(hiddenWord[i] == toupper(guess[i]))
-            {
-                riktigePosisjoner+= 1; 
-                guess.erase(i,1);
-                hiddenWordReplica.erase(i,1);
-            }
+        for (int i =0; i < 4 ; i ++){
+            riktigeBokstaver += countChar(hiddenWord, guess[i]);
         }
-        cout<<guess<<" -- guess\n";
-        cout<<hiddenWordReplica<<" --word replica\n";
-        cout <<hiddenWord<<"\n";
-        if (riktigePosisjoner == 4)
-        {
-            cout << "Gratulerer! Ordet var: "<<hiddenWord<<"\n";
+        riktigePosisjoner += checkCharactersAndPos(hiddenWord, guess);
+
+        if (riktigePosisjoner == 4){
+            cout << "Gratulerer! Du har gjettet riktig!\n";
             correctGuess = true;
             break;
         }
-        else
-        {
-            for (int i = guess.length()-1; i >= 0; --i)
-            {
-                for (int q = hiddenWordReplica.length()-1; q >= 0; --q)
-                {   
-                    cout<<"i: "<<i<<" q: "<<q<<" guess[i]: "<<guess[i]<<" hiddenWordReplica[q]: "<<hiddenWordReplica[q]<<"\n";
-                    if (guess[i] == hiddenWordReplica[q])
-                    {
-                        riktigeBokstaver += 1;
-                        hiddenWordReplica.erase(q,1);
-                        break;
-                    }
-                }
-            }
+        else if (forsok == maxForsok){
+            cout << "Du har brukt opp alle forsøkene dine. Du har tapt.\n";
+            break;
         }
+        else
+            cout << "Du har "<<riktigeBokstaver<<" riktige bokstaver og "<<riktigePosisjoner<<" riktige posisjoner.\n";
         
-
-        //addFeedback(mwin, riktigePosisjoner, riktigeBokstaver);
-        //mwin.redraw();
-
-        cout << "---\nDu hadde "<<riktigeBokstaver<< " riktige bokstaver, og "<< riktigePosisjoner <<"  av disse var også riktig plassert.\n---\n";
-        
-    }
-    if (correctGuess == false)
-    {
-        cout<<"Beklager, du klarte ikke å gjette riktig. Ordet var: "<<hiddenWord<<"\nDu er sikkert god til andre ting...";
     }
 }
-**/

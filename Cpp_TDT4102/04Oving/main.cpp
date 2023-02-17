@@ -7,6 +7,7 @@ int main()
 	
 
 	testCallByReference();
+	playMasterMind();
 
 	cout<<"Halla\n";
 	return 0;
