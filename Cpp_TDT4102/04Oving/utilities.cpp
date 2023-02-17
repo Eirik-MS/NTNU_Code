@@ -47,7 +47,7 @@ string randomizeString(int len, char lower, char upper)
     std::default_random_engine generator(rd());
     
     for(int i=0; i < len; i++){
-        std::uniform_real_distribution<int> distribution(lower,upper);
+        std::uniform_real_distribution<double> distribution(0.0,range-1);
         int number = distribution(generator);
         char r = 'A' + number;
         result += r;
@@ -65,8 +65,6 @@ string readInputToString(int n, char lower, char upper)
         upper = toupper(upper);
     };
 
-
-
     string resultat = "";
     bool breaker = true;
 
@@ -77,7 +75,6 @@ string readInputToString(int n, char lower, char upper)
         
         if ((resultat.length() == n) && (std::all_of(resultat.begin(), resultat.end(), [](unsigned char c){return std::isalpha(c);})))
         {
-            int iterations = 0;
             for(int i=0;i<n;++i)
                 {
                     char a = resultat[i];
