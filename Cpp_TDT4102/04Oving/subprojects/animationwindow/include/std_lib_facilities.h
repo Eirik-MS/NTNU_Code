@@ -43,6 +43,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <filesystem>
 #include <algorithm>
 #include <array>
 #include <regex>
