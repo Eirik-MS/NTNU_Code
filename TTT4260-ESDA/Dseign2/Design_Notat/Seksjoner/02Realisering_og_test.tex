@@ -7,10 +7,143 @@ Figur \ref{fig:Fig2} viser den realiserte løsningen på et overordnet nivå. Te
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{Bilder/Realisert.png} 
+  \includegraphics[width=0.9\textwidth]{Bilder/Realisert.png} 
   \caption{Overblikk over den realiserte kretsen}
   \label{fig:Fig2}
 \end{figure}
 
 
-Figur \ref{fig:Fig3} viser realiseringen av en 3-bits fulladderer. 
+Figur \ref{fig:Fig3} viser realiseringen av en 3-bits fulladderer. Den er realiser med tre XOR porter som legger sammen ingang A og B dersom de er ulike, og sender det til utgang q. Deretter brukes en kombinasjon av AND og OR porter for å sende bæretallet videre. 
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Bilder/3-bit_adderer.png} 
+  \caption{Fulladderer}
+  \label{fig:Fig3}
+\end{figure}
+
+Figur \ref{fig:Fig4} viser realiseringen av en 3-bits mux, hvor man utnytter FPGAen sine interne MUXer.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Bilder/3-bit_MUX.png} 
+  \caption{3-bits mux}
+  \label{fig:Fig4}
+\end{figure}
+
+For at LED lysene skal lyse i et mønster som tilsvarer terningens øyne, må vi ha en dekoder som kan dekode terningkastet til et mønster. I figur \ref{fig:Fig5} viser vi realiseringen av en dekoderen og i tabell \ref{table:tab1} vises sannhetstabellen for dekoderen. Figur \ref{fig:Fig6} viser LED matrisen som er koblet opp til dekoderen med navnene utgangen av dekoderen i riktig mønster.
+
+\begin{figure}[!h]
+  \centering
+  \begin{minipage}[c]{0.6\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Bilder/Dekoder.png} 
+    \caption{}
+    \label{fig:Fig5}   
+  \end{minipage}
+  \hfill
+  \begin{minipage}[c]{0.3\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Bilder/LED_Matrix.drawio.png} 
+    \caption{}
+    \label{fig:Fig6}
+  \end{minipage}   
+\end{figure}
+
+\begin{table}
+  \centering
+  \caption{Sannhetstabell for dekoderen}
+  \newcolumntype{?}{!{\vrule width 2pt}}
+  \begin{tabular}[!h]{ |c|c|c?c|c|c|c|c|c|c| } 
+      \hline
+      $T_2$ & $T_1$ & $T_0$ & $D_6$ & $D_5$ & $D_4$ & $D_3$ & $D_2$ & $D_1$ & $D_0$\\
+      \hline
+      0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+      \hline
+      0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ 
+      \hline
+      0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\ 
+      \hline 
+      0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 \\ 
+      \hline
+      1 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 \\ 
+      \hline
+      1 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 \\ 
+      \hline
+      1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 \\ 
+      \hline
+     \end{tabular}
+    
+    \label{table:tab1} 
+\end{table}
+
+Telleren er designet på en slik måte at den aldri teller til mer en 6 (110) så man kan se bort ifra når ingagnssignalet er 111. Dette gjør at de boolske utrykkene som er brukt til å designe dekoderen i figur \ref*{fig:Fig5} blir vesentlig mye enklere. De boolske uttrykkene som er brukt for å designe dekoderen er vist i likningene \ref{eq:1} - \ref{eq:5}.
+
+\begin{equation}
+  D_0 = \overline{T_0}T_1T_2
+  \label{eq:1}
+\end{equation}
+\begin{equation}
+  D_1 = D_5 = T_0T_1T_2
+  \label{eq:2}
+\end{equation}
+\begin{equation}
+  D_2 = D_6 = T_2
+  \label{eq:3}
+\end{equation}
+\begin{equation}
+  D_3 = T_0
+  \label{eq:4}
+\end{equation}
+\begin{equation}
+  D_4 = \overline{T_2}T_1 + T_2
+  \label{eq:5}
+\end{equation}
+
+For å måle effektforbruket til terningen så måler vi spenningen over hver av de 7 LEDene og regener strømmen gjennom motstandene for å beregne effektforbruket. I tabell \ref{table:tab2} viser vi målingene av spenningen over hver av LEDene.
+
+\begin{table}[!h]
+  \centering
+  \caption{Målinger av spenningen over hver av LEDene}
+  \newcolumntype{?}{!{\vrule width 2pt}}
+  \begin{tabular}[!h]{ |c?c|c|c|c|c|c|c| } 
+    \hline
+    Terningkast & $V_{LED0}$ & $V_{LED1}$ & $V_{LED2}$ & $V_{LED3}$ & $V_{LED4}$ & $V_{LED5}$ & $V_{LED6}$ \\
+    \hline
+    1 & - & - & - & 3.234 & - & - & - \\
+    \hline
+    2 & - & - & 3.123 & - & - & - & 3.123 \\
+    \hline
+    3 & - & - & 3.123 & 3.123 & - & - & 3.123 \\
+    \hline
+    4 & 3.132 & - & 3.003 & - & 3.003 & - & 3.132 \\
+    \hline
+    5 & 3.132 & - & 3.003 & 3.003 & 3.003 & - & 3.132 \\
+    \hline
+    6 & 3.132 & 3.403 & 3.003 & - & 3.003 & 3.004 & 3.132 \\
+    \hline
+  \end{tabular}
+  
+  \label{table:tab2}
+\end{table}
+
+Vi regner ut strømmen gjennom motstandene ved å bruke formelen \ref{eq:6}.
+\begin{equation}
+  I = \frac{V}{R}
+  \label{eq:6}
+\end{equation}
+
+Der $V$ er spenningen over motstanden og $R$ er motstandens verdi. Vi regner ut strømmen gjennom hver av motstandene og regner deretter ut effektforbruket til hver av LEDene ved å bruke formelen \ref{eq:7}.
+
+\begin{equation}
+  P = V*I
+  \label{eq:7}
+\end{equation}
+
+For å regne ut effektforbruket til hver av lysdiodene så må vi vite hvor ofte den lyser, i tilleg til strømmen gjennom den. Vi regner ut hvor ofte hver av LEDene lyser ved å se på sansynligheten til hver verdi terningen kan få og om LEDen lyser ved den verdien. Vi regner ut sansynligheten ved å bruke formelen \ref{eq:8}. 
+
+\begin{equation}
+  P = \frac{Antall\ gunstige}{Antall\ mulige}
+  \label{eq:8}
+\end{equation}
+

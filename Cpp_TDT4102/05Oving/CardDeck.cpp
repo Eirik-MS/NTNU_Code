@@ -29,7 +29,8 @@ void CardDeck::print(){
 
 void CardDeck::shuffle(){
     for (int i = 0; i < cards.size(); i++){
-        int idxA = rand()%51; //lager tilfeldige tall mellom 0 og 51, siden kortstokken er 52 lang
+        //lager tilfeldige tall mellom 0 og 51, siden kortstokken er 52 lang
+        int idxA = rand()%51; 
         swap(i, idxA);
     }
 }
@@ -112,6 +113,7 @@ void BlackJack::drawDealerCard(){
 }
 
 void BlackJack::playGame(){
+    //Initial draw of cards for player and dealer 
     shuffle();
     drawPlayerCard();
     drawPlayerCard();
@@ -119,6 +121,8 @@ void BlackJack::playGame(){
     drawDealerCard();
     cout << "Dealer card: " << dealerHand[0].toString() << endl;
     drawDealerCard();
+
+    //Player turn and main game loop
     if (playerSum < 21)
     {
         bool cont = true;
@@ -135,14 +139,17 @@ void BlackJack::playGame(){
             }
         }
     }
+
     cout << "----- \n Current hand: \n";
     for (int i = 0; i < playerHand.size(); i++){
         cout << playerHand[i].toString() << "  |  ";
     }
+
     cout << endl;
     cout << "Player points: " << playerSum << endl;
     cout << "Dealer points: " << dealerSum << endl;
 
+    //Dealer turn
     while (dealerSum < 17){
         drawDealerCard();
         cout << "Dealer points: " << dealerSum << endl;
@@ -152,6 +159,7 @@ void BlackJack::playGame(){
         cout << dealerHand[i].toString() << "  |  ";
     }
 
+    //Check who won
     if (playerSum > 21 || (playerSum <= dealerSum && dealerSum < 22)){
         cout << "\nBeklager, du tapte\n";
     } else if (playerSum > dealerSum || dealerSum > 21) {
