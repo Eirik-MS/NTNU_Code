@@ -42,8 +42,7 @@ bool isInProgram(struct Student info, string studie)
 
 string randomizeString(int len, char lower, char upper)
 {
-    int range = upper+1-lower;
-    std::string result = "";
+    string result = "";
     std::random_device rd;
     std::default_random_engine generator(rd());
     
@@ -67,7 +66,10 @@ string readInputToString(int n, char lower, char upper)
     };
 
     string resultat = "";
+    bool breaker = true;
 
+    while(breaker)
+    {
         cout<<"Skriv en streng som er "<<n<<" lang, og hvor hver bokstav er mellom "<<lower<<" og "<<upper<<"\n";
         cin>>resultat;
         
@@ -84,8 +86,10 @@ string readInputToString(int n, char lower, char upper)
                         {
                             break;
                         }
-                    //cout<<"a - "<<a<<"; i - "<<i<<"; aNum - "<<aNumber<<"; lNum - "<<lowerNumber<<"; uNum - "<<upperNumber<<"\n";
+                    iterations += 1;
                 }
+            if (iterations == n){breaker = false;}
+        }
     }
     return resultat;
 }
@@ -101,49 +105,4 @@ int countChar(string word, char letter)
         }
     }
     return counter;
-}
-
-int checkCharactersAndPos(string hiddenWord, string guess){
-    int riktigePosisjoner = 0;
-    for (int i =0; i < hiddenWord.length(); i ++){
-        if (hiddenWord[i] == guess[i]){
-            riktigePosisjoner += 1;
-        }
-    }
-    return riktigePosisjoner;
-}
-
-
-void playMasterMind(){
-    string hiddenWord = randomizeString(4,'A','F');
-    cout << "Hidden word: "<<hiddenWord<<"\n";
-    bool correctGuess = false;
-    cout << "Du spiller naa Master Mind!\n";
-    int maxForsok = 6;
-    for (int forsok = 0; forsok <= maxForsok; forsok++)
-    {
-        cout << "***\nForsok nr. "<<forsok<<" / "<<maxForsok<<"\n***\n";
-        cout << "Gjor ett gjett.\n";
-        string guess = readInputToString(4,'A','F');
-        int riktigeBokstaver = 0;
-        int riktigePosisjoner = 0;
-        
-        for (int i =0; i < 4 ; i ++){
-            riktigeBokstaver += countChar(hiddenWord, guess[i]);
-        }
-        riktigePosisjoner += checkCharactersAndPos(hiddenWord, guess);
-
-        if (riktigePosisjoner == 4){
-            cout << "Gratulerer! Du har gjettet riktig!\n";
-            correctGuess = true;
-            break;
-        }
-        else if (forsok == maxForsok){
-            cout << "Du har brukt opp alle forsøkene dine. Du har tapt.\n";
-            break;
-        }
-        else
-            cout << "Du har "<<riktigeBokstaver<<" riktige bokstaver og "<<riktigePosisjoner<<" riktige posisjoner.\n";
-        
-    }
 }
