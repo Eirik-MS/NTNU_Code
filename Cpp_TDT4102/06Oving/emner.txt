@@ -1,0 +1,4 @@
+TDT4100|Programmering grunnkurs
+TDT4102|Objektorientert programmering
+TDT4110|Informasjonsteknologi grunnkurs
+TTK4145|Sanntidsprogrammering

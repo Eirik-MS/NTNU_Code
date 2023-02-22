@@ -1,0 +1,2 @@
+1: dette er første linje
+2: dette er andre linje
