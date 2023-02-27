@@ -4,5 +4,7 @@
 			"path": "../../Git/NTNU_Code/TTT4260-ESDA"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"workspaceExplorer.workspaceStorageDirectory": "C:\\Users\\eirik\\Documents\\Git\\NTNU_Code"
+	}
 }
