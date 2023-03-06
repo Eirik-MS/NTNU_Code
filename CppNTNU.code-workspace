@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "Cpp_TDT4102/Insperia_01"
+		},
+		{
+			"path": "Cpp_TDT4102/07Oving"
 		}
 	],
 	"settings": {
@@ -113,5 +116,10 @@
 			"string_view": "cpp",
 			"cinttypes": "cpp"
 		}
+	},
+	"extensions": {
+		"recommendations": [
+			"angelo-breuer.clock"
+		]
 	}
 }
