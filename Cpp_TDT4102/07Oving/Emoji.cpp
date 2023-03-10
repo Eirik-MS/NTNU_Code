@@ -28,6 +28,6 @@ void LaughingFace::draw(AnimationWindow& win){
 
 void AngryFace::draw(AnimationWindow& win){
     SadFace::draw(win);
-    win.draw_line(Point{center.x - radius, center.y-radius}, Point{center.x - radius/7, center.y - radius/3}, Color::black);
-    win.draw_line(Point{center.x + radius, center.y-radius}, Point{center.x + radius/7, center.y - radius/3}, Color::black);
+    win.draw_line(Point{center.x - radius/2, center.y-radius}, Point{center.x - radius/7, center.y - radius/3}, Color::black);
+    win.draw_line(Point{center.x + radius/2, center.y-radius}, Point{center.x + radius/7, center.y - radius/3}, Color::black);
 }
