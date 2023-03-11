@@ -1,6 +1,6 @@
 #pragma once
-#include "std_lib_facilities.h"
-#include "AnimationWindow.h"
+#include "/home/eirik/Documents/NTNU_Code/Cpp_TDT4102/07Oving/subprojects/std_lib_facilities/std_lib_facilities.h"
+#include "/home/eirik/Documents/NTNU_Code/Cpp_TDT4102/07Oving/subprojects/animationwindow/include/AnimationWindow.h"
 
 // Abstrakt klasse. Arvende konkrete klasser må implementere funksjonen draw()
 // som tegner former i vinduet de skal bli vist i.

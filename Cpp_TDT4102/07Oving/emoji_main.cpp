@@ -1,4 +1,4 @@
-#include "AnimationWindow.h"
+#include "/home/eirik/Documents/NTNU_Code/Cpp_TDT4102/07Oving/subprojects/animationwindow/include/AnimationWindow.h"
 #include "Emoji.h"
 #include "animal.hpp"
 
