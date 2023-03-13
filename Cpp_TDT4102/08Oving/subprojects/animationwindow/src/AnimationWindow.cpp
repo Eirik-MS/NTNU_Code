@@ -106,7 +106,9 @@ void TDT4102::AnimationWindow::update_gui() {
     for (Widget& widget : widgets) {
         startNuklearDraw(widget.position, widget.uniqueWidgetName, widget.width, widget.height);
         fontCache.setFont(context, Font::arial, 18);
-        widget.update(context);
+        if(widget.isVisible) {
+            widget.update(context);
+        }
         endNuklearDraw();
     }
 }
@@ -129,6 +131,10 @@ void TDT4102::AnimationWindow::next_frame() {
 
 bool TDT4102::AnimationWindow::should_close() const {
     return closeRequested;
+}
+
+void TDT4102::AnimationWindow::close() {
+    closeRequested = true;
 }
 
 void TDT4102::AnimationWindow::wait_for_close() {

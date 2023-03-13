@@ -25,3 +25,7 @@ void TDT4102::DropdownList::update(nk_context *context) {
         nk_combo_end(context);
     }
 }
+
+void TDT4102::DropdownList::setOptions(std::vector<std::string>& updatedOptionsList) {
+    options = updatedOptionsList;
+}

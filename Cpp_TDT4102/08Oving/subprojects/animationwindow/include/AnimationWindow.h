@@ -86,6 +86,9 @@ namespace TDT4102 {
         // Using this function makes sure GUI elements such as buttons are interactive and are drawn.
         void wait_for_close();
 
+        // Close window immediately the next time next_frame() or wait_for_close() is called
+        void close();
+
         // Pauses execution for a specified amount of time
         static void wait_for(double timeSeconds);
 

@@ -1,57 +1,48 @@
-//
-// This is example code from Chapter 2.2 "The classic first program" of
-// "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
-//
-// This program outputs the message "Hello, World!" to the monitor
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "stdio.h"
+#include <iostream>
+#include "Matrix.h"
 
 
-//------------------------------------------------------------------------------'
 
-// C++ programs start by executing the function main
-int main() {
-    char str[] = "26-dac_write-1F-18-7-32-21";
-	int init_size = strlen(str);
-	char delim[] = "-";
+int main(){
+	std::cout <<"Start of program"<<std::endl;
+	Matrix test1{3,3};
+	test1.set(1,1,4);
+	std::cout << "Yo " << test1.get(1,1) << std::endl;
 
-	char *ptr = strtok(str, delim);
-
-    char* arr[6];
-    int i = 0;
-
-	while(ptr != NULL)
-	{
-		printf("'%s'\n", ptr);
-		ptr = strtok(NULL, delim);
-        arr[i] = ptr;
-        i++;
-
-	}
-
-    char number1 = *arr[5];
-    int num = atoi(arr[5]);
-    int num2 = num+1;
-
-    int arr2[5];
-    for (int i = 0; i < 6; i++){
-        char *kar = arr[i];
-        arr2[i] = atoi(kar);
-    }
-    
-
-    printf("'%s'\n", arr[0]);
-    printf("'%s'\n", arr[5]);
-    printf("%d\n", num);
-    printf("%d\n", num2);
-    printf("%d\n", arr2[0]);
-    printf("%d\n", arr2[5]);
-    
-	
-
+	std::cout<<"End of program"<<std::endl;
 	return 0;
 }
 
-//------------------------------------------------------------------------------
+
+//Training in the use of dynamic memory allocation
+void fillINFibonacciNumbers(int *result, int length){
+	for (int i = 0; i < length; i++){
+		if (i > 1){
+			result[i] = result[i - 1] + result[i - 2];
+		}
+		else if (i == 1){
+			result[i] = 1;
+		}
+		else{
+			result[i] = 0;
+		}
+	}
+}
+
+void printFibonacciNumbers(int *result, int length){
+	for (int i = 0; i < length; i++){
+		std::cout << result[i] << std::endl;
+		//printf("%d\n", result[i]);
+	}
+}
+
+void createFibonacci(){
+	int length = 0;
+	std::cout << "Enter the length of the Fibonacci sequence: ";
+	std::cin >> length;
+	int *result = new int[length];
+	fillINFibonacciNumbers(result, length);
+	printFibonacciNumbers(result, length);
+	
+}

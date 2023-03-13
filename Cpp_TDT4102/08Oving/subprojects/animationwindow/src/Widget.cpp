@@ -15,3 +15,7 @@ TDT4102::Widget::Widget(TDT4102::Point location, unsigned int widgetWidth, unsig
     uniqueWidgetName = "widget_" + std::to_string(internal::nextWidgetID);
     internal::nextWidgetID++;
 }
+
+void TDT4102::Widget::setVisible(bool visible) {
+    isVisible = visible;
+}

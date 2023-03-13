@@ -14,5 +14,6 @@ namespace TDT4102 {
     public:
         explicit DropdownList(TDT4102::Point location, int width, int height, std::vector<std::string> &options);
         std::string getValue();
+        void setOptions(std::vector<std::string>& updatedOptionsList);
     };
 }
