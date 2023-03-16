@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include <iostream>
 #include "Matrix.h"
+#include "dummy.h"
 
 
 
@@ -10,7 +11,11 @@ int main(){
 	test1.set(1,1,4);
 	std::cout << "Yo " << test1.get(1,1) << std::endl;
 
-	std::cout<<"End of program"<<std::endl;
+	std::cout << test1 << std::endl;
+
+	std::cout<<"End of Matrix"<<std::endl;
+
+	dummyTest();
 	return 0;
 }
 

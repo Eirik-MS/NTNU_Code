@@ -1,4 +1,7 @@
 #include <cassert>
+#include <iostream>
+#include <iomanip>
+#include <ios>
 
 class Matrix{
 private:
@@ -19,6 +22,9 @@ public:
 	int getColums() const;
 
 	//Oveload of operators
+	Matrix(Matrix& mat);
 	double* operator[](int pos);
+	friend std::ostream& operator<<(std::ostream& os, Matrix& mat);
+	friend Matrix& Matrix::operator=(Matrix& mat);
 };
 
