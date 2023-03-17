@@ -1,30 +1,3 @@
-#Digilent WaveForms Network Analyzer - Bode
-#Device Name: Discovery2
-#Serial Number: SN:210321B3D979
-#Date Time: 2023-03-10 14:15:55.451
-#Start: 10 Hz
-#Stop: 10000 Hz
-#Steps: 1001
-#Wavegen: Wavegen C1
-#Amplification: 1 X
-#Settle: 10 ms
-#MinPeriods: 16 
-#Channel: Channel 1
-#Range: 5.53587 V
-#Offset: 3.25771e-05 V
-#Relative: no
-#Channel: Channel 2
-#Range: 5.51007 V
-#Offset: 0.000229542 V
-#Relative: yes
-#Wavegen Channel 1: Running
-#Mode: Simple
-#Type: Lydsignal_106.wav
-#Frequency: 44.1 kHz
-#Period: 22.675737 us
-#Amplitude: 1 V
-#Offset: 0 V
-
 #Frequency (Hz),Channel 1 Magnitude (dB),Channel 2 Magnitude (dB),Channel 2 Phase (deg)
 10.00000000000001,0.01134607603666616,-0.00916421684706702,-0.143261907271274
 10.06931668851806,0.01148973797701318,-0.009118896639468667,-0.1459679498834419
