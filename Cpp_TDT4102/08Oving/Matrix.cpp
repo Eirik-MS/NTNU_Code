@@ -99,15 +99,15 @@ Matrix& Matrix::operator=(Matrix& mat){
 			listPtrCol[i][k] = mat.get(i,k);
 		}
 	}
-	return mat
+	return *this;
 }
 
 Matrix& Matrix::operator+=(Matrix& mat){
 	for (int i=0; i < ncolums; i++){
 		for (int k= 0; k < nrows; k++){
 			double val = listPtrCol[i][k] + mat.get(k,i);
-			mat.set(k,i,val);
+			listPtrCol[i][k] = val;
 		}
 	}
-	return mat;
+	return *this;
 }
