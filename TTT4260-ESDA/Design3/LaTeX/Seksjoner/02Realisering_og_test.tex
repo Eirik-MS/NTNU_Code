@@ -28,7 +28,7 @@ Med utgangspunkt i hvilke komponenter som er tilgjengelig så er store deler av 
 \end{equation}
 
 \begin{equation}
-	C = \frac{1}{(2\pi \cdot 2489Hz)^2 \cdot 101.9mH} = 40.1645 \cdot 10^-9 \approx 40nF
+	C = \frac{1}{(2\pi \cdot 2489Hz)^2 \cdot 101.9mH} = 4.01645 \cdot 10^-8 \approx 40nF
 	\label{eq:3}
 \end{equation}
 
@@ -61,7 +61,7 @@ Først ble filteret testet ved å kjøre en netverksanalyse på det og generere 
 	\label{fig:fig6}
 \end{figure}
 
-For å teste hvorvit realiseringen faktisk fungerer så ble ble lydfilen spilt gjennom filteret og en spektrumsanalyse ble gjort på utgangssignalet til filteret med WaveForms. 
+For å teste hvorvit realiseringen faktisk fungerer så ble ble lydfilen spilt gjennom filteret og en spektrumsanalyse ble gjort på utgangssignalet til filteret med WaveForms. Pipelyden er tydelig redusert i lydklippet og med spektrumsanalysen i figur \ref{fig:fig7} er det tydelig at pipelyden er redusert med 24.5dB. 
 
 \begin{figure}[!h]
 	\centering
@@ -70,3 +70,32 @@ For å teste hvorvit realiseringen faktisk fungerer så ble ble lydfilen spilt g
 	\label{fig:fig7}
 \end{figure}
 
+Problemstillingen var å forbedre signalkvaliteten til en lydfil, men siden pipetonen fremdeles kan høres så anses det derfor som en delvis løsning. For å få en fulstendig løsning så blir det konstruert et identisk filter i serie med det første filteret. Dette filteret vil ha samme resonansfrekvens, men grunnet unøyaktige komponenter så må det utregnes en ny kondensatorverdi med formelen i \ref{eq:2}. Den nye spolen har en verdi på $91.8mH$. Den optimale kondensatorverdien blir da $44.5nF$ som sett i utregning \ref{eq:4}, men kondensatoren blir realisert med $C = 44.7nF$ som er vist i figur \ref{fig:fig8}.
+
+\begin{equation}
+	C = \frac{1}{(2\pi \cdot 2489Hz)^2 \cdot 91.8mH} = 4.45398 \cdot 10^-8 \approx 44.5nF
+	\label{eq:4}
+\end{equation}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Bilder/RLC_filterV2.drawio.png}
+	\caption{Design nummer to}
+	\label{fig:fig8}
+\end{figure}
+
+Når det blir gjort identiske tester kan man se tydelig forbedring i lydklippet, og det pipelyden er ikke lenger hørbar. I bodeplottet, \ref{fig:fig9}, og i spektrumsanalysen, \ref{fig:fig10} kan det leses ut en ny dempning på $40.8dB$.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Bilder/bode2x1K.png}
+	\caption{Bodeplot av filteret}
+	\label{fig:fig9}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Bilder/spectrum2x1K.png}
+	\caption{Spektrumsanalyse av filteret}
+	\label{fig:fig10}
+\end{figure}

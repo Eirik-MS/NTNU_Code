@@ -21,6 +21,7 @@ with open(spectrumReadFile, 'r') as f:
 	header = data[0]
 	data = data[1:]
 	for line in data:
+		
 		# split line
 		split_line = line.split(',')
 		# append to lists
@@ -31,17 +32,17 @@ with open(spectrumReadFile, 'r') as f:
 		C2_phase.append(float(split_line[4]))
 
 #find index and value of max gain
-max_gain = max(C1_gain)
-max_gain_index = C1_gain.index(max_gain)
+max_gain = max(C2_gain)
+max_gain_index = C2_gain.index(max_gain)
 max_gain_freq = round(Frequency[max_gain_index], 0)
 
 #find gain value after reduction
-red_gain = C2_gain[max_gain_index]
+red_gain = C1_gain[max_gain_index]
 
 #Plot the spectrum analysis without phase
 
-plt.semilogx(Frequency, C1_gain, label='C1')
-plt.semilogx(Frequency, C2_gain, label='C2')
+plt.semilogx(Frequency, C2_gain, label='C1')
+plt.semilogx(Frequency, C1_gain, label='C2')
 plt.semilogx(max_gain_freq, max_gain, 'ro', label=str(max_gain_freq) + ' Hz' + ', ' + str(round(max_gain,1)) + ' dB')
 plt.semilogx(max_gain_freq, red_gain, 'go', label='2489 Hz' + ', ' + str(round(red_gain,1)) + ' dB')
 plt.legend()

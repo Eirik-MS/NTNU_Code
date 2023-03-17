@@ -1,7 +1,12 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
 # plot bode plot for a rcl circuit from csv file
+
+#bodeReadFile = 'bode1K.csv'
+#bodeWriteFile = './LaTeX/Bilder/bode1K.png'
+
+bodeReadFile = 'bode2x1K.csv'
+bodeWriteFile = './LaTeX/Bilder/bode2x1K.png'
 
 Frequency = []
 C1_gain = []
@@ -9,7 +14,7 @@ C2_gain = []
 phase = []
 
 # read csv file
-with open('bode1K.csv', 'r') as f:
+with open(bodeReadFile, 'r') as f:
 	data = f.readlines()
 	# remove header
 	header = data[0]
@@ -19,9 +24,9 @@ with open('bode1K.csv', 'r') as f:
 		split_line = line.split(',')
 		# append to lists
 		Frequency.append(float(split_line[0]))
-		C1_gain.append(float(split_line[1]))
-		C2_gain.append(float(split_line[2]))
-		phase.append(float(split_line[3]))
+		C1_gain.append(float(split_line[3]))
+		C2_gain.append(float(split_line[1]))
+		phase.append(float(split_line[2]))
 
 #find index and value of max gain
 max_gain = min(C2_gain)
@@ -51,7 +56,7 @@ plt.subplot(212)
 plt.semilogx(Frequency, phase)
 plt.xlabel('Frequency (Hz)')
 plt.ylabel('Phase (deg)')
-plt.savefig('./LaTeX/Bilder/bode1K.png', dpi=600)
+plt.savefig(bodeWriteFile, dpi=600)
 #plt.show()
 
 # Save plot

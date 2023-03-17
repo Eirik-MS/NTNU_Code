@@ -7,13 +7,21 @@
 
 int main(){
 	std::cout <<"Start of program"<<std::endl;
-	Matrix test1{3,3};
-	test1.set(1,1,4);
-	std::cout << "Yo " << test1.get(1,1) << std::endl;
+	Matrix A(3,3);
+	Matrix B(3,3);
+	Matrix C(2,3);
+	for (int i = 0; i < 3; i++){
+		for (int k = 0; k < 3; k++){
+			A.set(i,k, 4+i);
+			B.set(k,i, 3-1);
+		}
+		
+	}
+	C += A;
+	C += B;
 
-	std::cout << test1 << std::endl;
+	std::cout << A << C << std::endl;
 
-	std::cout<<"End of Matrix"<<std::endl;
 
 	dummyTest();
 	return 0;

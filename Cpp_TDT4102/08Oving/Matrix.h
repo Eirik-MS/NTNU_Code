@@ -24,7 +24,9 @@ public:
 	//Oveload of operators
 	Matrix(Matrix& mat);
 	double* operator[](int pos);
+	Matrix& operator=(Matrix& mat);
+	Matrix& operator+=(Matrix& mat);
 	friend std::ostream& operator<<(std::ostream& os, Matrix& mat);
-	friend Matrix& Matrix::operator=(Matrix& mat);
+	
 };
 
