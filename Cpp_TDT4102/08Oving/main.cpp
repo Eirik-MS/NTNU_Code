@@ -7,13 +7,13 @@
 
 int main(){
 	std::cout <<"Start of program"<<std::endl;
-	Matrix A(3,3);
-	Matrix B(3,3);
-	Matrix C(3,3);
-	for (int i = 0; i < 3; i++){
-		for (int k = 0; k < 3; k++){
+	Matrix A(4,4);
+	Matrix B(4,4);
+	Matrix C(4,4);
+	for (int i = 0; i < 4; i++){
+		for (int k = 0; k < 4; k++){
 			A.set(i,k, 4+k);
-			B.set(k,i, 3-i);
+			B.set(k,i, 3-i*2);
 		}
 		
 	}
