@@ -4,4 +4,4 @@
 \contentsline {section}{\numberline {3}Realisering og test}{3}{section.3}%
 \contentsline {section}{\numberline {4}Konklusjon}{8}{section.4}%
 \contentsline {section}{\numberline {5}Takk}{8}{section.5}%
-\contentsline {section}{Referanser}{9}{section*.12}%
+\contentsline {section}{Referanser}{9}{section*.14}%
