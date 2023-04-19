@@ -3,7 +3,12 @@
 
 # ignore ALL files in ANY directory named temp
 temp/
+
+subprojects/
+builddir/
+
 Cpp_TDT4102/*/subprojects
+Cpp_TDT4102/*/builddir
 .vscode/
 .vs/
 
