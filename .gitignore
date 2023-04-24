@@ -3,7 +3,12 @@
 
 # ignore ALL files in ANY directory named temp
 temp/
+
+subprojects/
+builddir/
+
 Cpp_TDT4102/*/subprojects
+Cpp_TDT4102/*/builddir
 .vscode/
 .vs/
 
@@ -15,3 +20,5 @@ DTE-2600/.vs/The Basics/v17/Solution.VC.db
 DTE-2600/.vs/The Basics/v17/Browse.VC.db
 DTE-2600/.vs/The Basics/v17/.suo
 Cpp_TDT4102/*/main.exe
+
+*.exe

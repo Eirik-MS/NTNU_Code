@@ -6,6 +6,7 @@
 
 
 int main(){
+	createFibonacci()
 	std::cout <<"Start of program"<<std::endl;
 	Matrix A(4,4);
 	Matrix B(4,4);
@@ -57,5 +58,5 @@ void createFibonacci(){
 	int *result = new int[length];
 	fillINFibonacciNumbers(result, length);
 	printFibonacciNumbers(result, length);
-	
+	delete[] result;
 }
