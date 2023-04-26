@@ -1,6 +1,6 @@
 #include "TetrisWindow.h"
 #include <iostream>
-#include <point.h>
+#include <subprojects/animationwindow/include/Point.h>
 #include <algorithm>    // std::all_of
 #include <array>
 
@@ -28,6 +28,7 @@ void TetrisWindow::run() {
         /********************************************************/
         //Kall draw-funksjonene her
         drawCurrentTetromino();
+        drawGridMatrix();
         /********************************************************/
 
         next_frame();
@@ -95,11 +96,17 @@ void TetrisWindow::handleInput() {
     if(currentZKeyState && !lastZKeyState) {
         std::cout << "Hello from z\n";
         currentTetromino.rotateCounterClockwise();
+        if (hasChrashed()) {
+            currentTetromino.rotateClockwise();
+        }
     }
 
     if(currentUpKeyState && !lastUpKeyState) {
         std::cout << "Hello from up\n";
         currentTetromino.rotateClockwise();
+        if (hasChrashed()) {
+            currentTetromino.rotateCounterClockwise();
+        }
     }
 
     if(currentLeftKeyState && !lastLeftKeyState) {
@@ -116,12 +123,15 @@ void TetrisWindow::handleInput() {
             }
             if (currentTetromino.getPosition().x > 0) {
                 currentTetromino.moveLeft();
+                if(hasChrashed())currentTetromino.moveRight();
             }
             else if (currentTetromino.getPosition().x == 0 && isFirstColumnZero) {
                 currentTetromino.moveLeft();
+                if(hasChrashed())currentTetromino.moveRight();
             }
             else if (currentTetromino.getPosition().x == -blockSize && isSecondColumnZero) {
                 currentTetromino.moveLeft();
+                if(hasChrashed())currentTetromino.moveRight();
             }
             
             
@@ -141,12 +151,15 @@ void TetrisWindow::handleInput() {
             }
             if (currentTetromino.getPosition().x < gridWidth*blockSize) {
                 currentTetromino.moveRight();
+                if(hasChrashed())currentTetromino.moveLeft();
             }
             else if (currentTetromino.getPosition().x == gridWidth*blockSize && isLastColumnZero) {
                 currentTetromino.moveRight();
+                if(hasChrashed())currentTetromino.moveLeft();
             }
             else if (currentTetromino.getPosition().x == gridWidth*blockSize+blockSize && isSecondLastColumnZero) {
                 currentTetromino.moveRight();
+                if(hasChrashed())currentTetromino.moveLeft();
             }
     }
 
@@ -167,16 +180,50 @@ void TetrisWindow::handleInput() {
 void TetrisWindow::moveTetrominoDown() {
     if (currentTetromino.getPosition().y+currentTetromino.getMatrixSize() < gridHeight*blockSize){
         currentTetromino.moveDown();
+        if (hasChrashed()) {
+            currentTetromino.moveUp();
+            fastenTetromino();
+            currentTetromino = generateRandomTetromino();
+        }
     }
     
 }
 
 void TetrisWindow::drawGridMatrix() {
-    for (int gridMatrixIndex = 0; gridMatrixIndex < gridMatrix.size(); gridMatrixIndex++) {
-        for (int i = 0; i < gridMatrix[gridMatrixIndex].size(); i++) {
-            if (gridMatrix[gridMatrixIndex][i] != TetrominoType::NONE) {
-                AnimationWindow::draw_rectangle(TDT4102::Point{blockSize*gridMatrixIndex, blockSize*gridMatrixIndex}, blockSize, blockSize, colorMap.at(gridMatrix[gridMatrixIndex][i]));
+    for (int i = 0; i < gridHeight; i++) {
+        for (int j = 0; j < gridWidth; j++) {
+            if(gridMatrix[i][j] != TetrominoType::NONE) {
+                AnimationWindow::draw_rectangle(TDT4102::Point{blockSize*j,blockSize*i},
+                                                blockSize, 
+                                                blockSize, 
+                                                colorMap.at(gridMatrix[i][j]));
             }
         }
     }
 }
+
+void TetrisWindow::fastenTetromino(){
+    for (int i = 0; i < currentTetromino.getMatrixSize(); i++) {
+        for (int j = 0; j < currentTetromino.getMatrixSize(); j++) {
+            if (currentTetromino.getBlock(i,j) != TetrominoType::NONE) {
+                gridMatrix[currentTetromino.getPosition().y/blockSize + i]
+                [currentTetromino.getPosition().x/blockSize + j] = currentTetromino.getBlock(i,j);
+            }
+        }
+    }
+};
+
+bool TetrisWindow::hasChrashed(){
+    for (int i = 0; i < currentTetromino.getMatrixSize(); i++) {
+        for (int j = 0; j < currentTetromino.getMatrixSize(); j++) {
+            if (currentTetromino.getBlock(i,j) != TetrominoType::NONE) {
+                if (gridMatrix[currentTetromino.getPosition().x/blockSize + i]
+                    [currentTetromino.getPosition().y/blockSize + j] != TetrominoType::NONE) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
