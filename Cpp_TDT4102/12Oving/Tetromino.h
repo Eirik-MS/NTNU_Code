@@ -1,8 +1,8 @@
 #pragma once
-#include "Point.h"
+#include "subprojects/animationwindow/include/Point.h"
 #include <vector>
 #include <map>
-#include "AnimationWindow.h"
+#include "subprojects/animationwindow/include/AnimationWindow.h"
 
 
 enum class TetrominoType{J, L, T, S, Z, O, I, NONE};
@@ -42,6 +42,7 @@ public:
     void moveDown();
     void moveLeft();
     void moveRight();
+    void moveUp();
 
     Tetromino& operator=(const std::vector<std::vector<int>>& other);
 
