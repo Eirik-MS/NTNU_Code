@@ -88,41 +88,17 @@ Point RobotGrid::get_grid_cell_center_coord(int x, int y) const
 // robots will not get the correct color before task S1 has been
 // solved.
 void RobotGrid::make_robot(string name, Point pos, Color color){
-  (void) name;
-  (void) pos;
-  (void) color;
 
+  check_name_available(name);
+  check_coord_bounds(pos);
+  check_coord_empty(pos, name, false);
+
+  //BEGIN: G3
   robots.emplace(name, new Robot{name, pos, color});
   return;
+
+  //END: G3
 }
-//void RobotGrid::make_robot(string name, Point pos, Color color)
-//{
-//  check_name_available(name);
-//  check_coord_bounds(pos);
-//  check_coord_empty(pos, name, false);
-//
-//  // BEGIN: G3
-//  //
-//  // Write your answer to assignment G3 here, between the // BEGIN: G3
-//  // and // END: G3 comments. You should remove any code that is
-//  // already there and replace it with your own.
-//
-//  robots.emplace(new Robot{name, pos, color}); //(name, Robot{name, pos, color});
-////C:/mingw64/include/c++/12.1.0/bits/new_allocator.h:175:23: 
-////error: no matching constructor for initialization of 
-////'std::pair<const std::basic_string<char>, std::unique_ptr<Robot>>'
-////How is this not allowed?
-//// I have tried:
-////robots[name]= Robot{name, pos, color};
-////robots.emplace(new Robot{name, pos, color});
-////and
-////robots.insert(new Robot{name, pos, color});
-//// They dont work
-//
-//  return;
-//
-//  // END: G3
-//}
 
 // Task G4: Drawing the robots
 //
@@ -143,12 +119,13 @@ void RobotGrid::draw_robots()
   // already there and replace it with your own.
 
 for (auto it = robots.begin(); it != robots.end(); ++it) {
-    window.draw_circle(get_grid_cell_center_coord(it->second.get()->pos.x,
-                                                  it->second.get()->pos.y),
+    window.draw_circle(get_grid_cell_center_coord(it->second->pos.x,
+                                                  it->second->pos.y),
                        cell_width/2,
-                       it->second.get()->color);
-    window.draw_text(get_grid_cell_edge_coord(it->second.get()->pos),
-                     it->second.get()->name);
+                       it->second->color);
+    window.draw_text(get_grid_cell_edge_coord(it->second->pos),
+                     it->second->name);
+
   }
 
   return;
@@ -323,8 +300,8 @@ void RobotGrid::check_name_available(string name) const
   // and // END: G11 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  if(robots.count(name)==0){
-    throw string("name not available");
+  if(robots.count(name)!=0){
+    //throw string("name not available");
   }
 
   return;

@@ -207,7 +207,7 @@ void TetrisWindow::fastenTetromino(){
         for (int j = 0; j < currentTetromino.getMatrixSize(); j++) {
             if (currentTetromino.getBlock(i,j) != TetrominoType::NONE) {
                 gridMatrix[currentTetromino.getPosition().y/blockSize + i]
-                [currentTetromino.getPosition().x/blockSize + j] = currentTetromino.getBlock(i,j);
+                          [currentTetromino.getPosition().x/blockSize + j] = currentTetromino.getBlock(j,i);
             }
         }
     }
