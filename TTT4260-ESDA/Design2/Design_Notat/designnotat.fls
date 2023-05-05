@@ -1,8 +1,8 @@
-PWD c:/Users/eirik/Documents/Git/NTNU_Code/TTT4260-ESDA/Dseign2/Design_Notat
+PWD c:/Users/eirik/Documents/Git/NTNU_Code/TTT4260-ESDA/Design2/Design_Notat
 INPUT c:/texlive/2022/texmf.cnf
 INPUT c:/texlive/2022/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/eirik/Documents/Git/NTNU_Code/TTT4260-ESDA/Dseign2/Design_Notat/designnotat.tex
+INPUT c:/Users/eirik/Documents/Git/NTNU_Code/TTT4260-ESDA/Design2/Design_Notat/designnotat.tex
 OUTPUT designnotat.log
 INPUT c:/texlive/2022/texmf-dist/tex/latex/base/article.cls
 INPUT c:/texlive/2022/texmf-dist/tex/latex/base/article.cls
@@ -708,6 +708,7 @@ INPUT designnotat.toc
 INPUT designnotat.toc
 INPUT c:/texlive/2022/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 OUTPUT designnotat.toc
+INPUT c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./Seksjoner/00Problembeskrivelse.tex
 INPUT ./Seksjoner/00Problembeskrivelse.tex
 INPUT ./Seksjoner/00Problembeskrivelse.tex
@@ -736,7 +737,6 @@ INPUT Seksjoner/02Realisering_og_test.tex
 INPUT ./Seksjoner/02Realisering_og_test.tex
 INPUT ./Seksjoner/02Realisering_og_test.tex
 INPUT Seksjoner/02Realisering_og_test.tex
-INPUT c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./Bilder/Realisert.png
 INPUT ./Bilder/Realisert.png
 INPUT Bilder/Realisert.png
