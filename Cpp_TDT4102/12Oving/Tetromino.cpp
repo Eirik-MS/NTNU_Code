@@ -130,6 +130,10 @@ void Tetromino::moveRight() {
     topLeftCorner.x += blockSize;
 }
 
+void Tetromino::moveUp() {
+    topLeftCorner.y -= blockSize;
+}
+
 bool Tetromino::blockExists(int row, int col) {
     return blockMatrix[row][col] != TetrominoType::NONE;
 }
