@@ -827,6 +827,7 @@ INPUT c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT c:/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
 INPUT c:/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT c:/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
+INPUT c:/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./Bilder/prinsipp_ulinært.jpg
 INPUT ./Bilder/prinsipp_ulinært.jpg
 INPUT Bilder/prinsipp_ulinært.jpg
@@ -861,7 +862,6 @@ INPUT ./Bilder/Realisert_system_skjema.drawio.png
 INPUT Bilder/Realisert_system_skjema.drawio.png
 INPUT ./Bilder/Realisert_system_skjema.drawio.png
 INPUT ./Bilder/Realisert_system_skjema.drawio.png
-INPUT c:/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./Bilder/Spectrum.png
 INPUT ./Bilder/Spectrum.png
 INPUT Bilder/Spectrum.png
@@ -909,4 +909,5 @@ INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr12.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri10.pfb
+INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
