@@ -1,6 +1,12 @@
 \babel@toc {norsk}{}\relax 
-\contentsline {section}{\numberline {1}Problembeskrivelse}{2}{section.1}%
+\contentsline {section}{\numberline {1}Problembeskrivelse}{1}{section.1}%
 \contentsline {section}{\numberline {2}Prinsipiell løsning}{2}{section.2}%
 \contentsline {section}{\numberline {3}Realisering og test}{3}{section.3}%
-\contentsline {section}{\numberline {4}Konklusjon}{7}{section.4}%
-\contentsline {section}{\numberline {5}Takk}{7}{section.5}%
+\contentsline {subsection}{\numberline {3.1}Overordnet}{3}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Adderer}{3}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Mux}{4}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Dekoder}{4}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Effekt}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Optimalisering}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Konklusjon}{9}{section.4}%
+\contentsline {section}{\numberline {5}Takk}{9}{section.5}%

@@ -1,11 +1,22 @@
+\newpage
 \section{Prinsipiell løsning}
+
 \label{prinsipiellLoesning}
 
 %Her kan du skrive om prinsipiell løsning
 
-For å designe en terning må man ha et tilfeldig tall man kan dekode til øyne på en terning. Som sett i \ref{fig:Fig1} så vil terningen i dette designnotatet bestå av en teller som teller fra 1 til 6 i klokkefrekvensen til FPGAen, den vil kun stoppe ved et signal som kommer fra en knapp brukeren kan trykke på. Dette vil ikke gi et helt tilfeldig tall, men hastigheten på systemet er så høy at man kan annta at systemet vil stoppe på en tilfeldig verdi. Som vist i \ref{fig:Fig1} Så er det lagt inn register etter telleren for å lagre terningkastets verdi. For så ha en dekoder som dekoder signalet til LED matrisen. 
+%For å designe en terning må man ha et tilfeldig tall man kan dekode til øyne på en terning. Som sett i \ref{fig:Fig1} så vil terningen i dette designnotatet bestå av en teller som teller fra 1 til 6 i klokkefrekvensen til FPGAen, den vil kun stoppe ved et signal som kommer fra en knapp brukeren kan trykke på. Dette vil ikke gi et helt tilfeldig tall, men hastigheten på systemet er så høy at man kan annta at systemet vil stoppe på en tilfeldig verdi. Som vist i \ref{fig:Fig1} Så er det lagt inn register etter telleren for å lagre terningkastets verdi. For så ha en dekoder som dekoder signalet til LED matrisen. 
 
-\begin{figure}[htbp]
+For å designe en terning må man ha et tilfeldig tall man kan dekode til øyne på en terning. Tilfeldigheten i dette terningdesignet kommer fra mennesklig faktor, det vil si at systemet vil kunne predikteres, men grunnet at et menneske interagerer med det så vil oppførselen være tilfeldig. Systemet vil bli designet som vist i firgur \ref{fig:Fig1} og bestå av 4 hovedelementer. 
+\begin{enumerate}
+  \item En teller som teller fra 1 til 6 i klokkefrekvensen til FPGAen
+  \item D-vipper som lagrer terningkastets verdi når knappen trykkes på.
+  \item En dekoder som dekoder signalet til LED matrisen.
+  \item LED matrise som viser terningkastet.
+\end{enumerate}
+Tallene som skal vises er fra 1-6, og for å kunne vise de trenger vi et 3 bit binært tall. Systemet er derfor bygd på en 3-bits parallel buss som er synkronisert opp med klokkefrekvensen til FPGAen.
+
+\begin{figure}[!h]
   \centering
   \includegraphics[width=0.6\textwidth,angle = 90]{Bilder/overordnet.png} 
   \caption{Prinsipiell overordnet løsning}
