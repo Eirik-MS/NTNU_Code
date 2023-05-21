@@ -10,3 +10,4 @@
 \contentsline {subsection}{\numberline {3.3}Optimalisering}{7}{subsection.3.3}%
 \contentsline {section}{\numberline {4}Konklusjon}{9}{section.4}%
 \contentsline {section}{\numberline {5}Takk}{9}{section.5}%
+\contentsline {section}{Referanser}{10}{section*.13}%
