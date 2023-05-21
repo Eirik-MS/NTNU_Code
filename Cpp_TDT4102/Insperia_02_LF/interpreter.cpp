@@ -17,13 +17,10 @@ Color Interpreter::get_color(string color_name)
   // Write your answer to assignment S1 here, between the // BEGIN: S1
   // and // END: S1 comments. You should remove any code that is
   // already there and replace it with your own.
-  
-  //SWITCH TO A NEWER C++ VERSION, C++22 has this as an inbuilt function for maps
-  //https://en.cppreference.com/w/cpp/container/map/contains
-  //if(!color_map.contains(color_name)){
-  //  throw string("Invalid color name: " + color_name);
-  //}
-  
+
+  if(color_map.find(color_name) == color_map.end()){
+      throw invalid_argument("The color '" + color_name + "' is not a valid color in this universe.");
+  }
   return color_map.at(color_name);
 
   // END: S1
@@ -58,53 +55,44 @@ void Interpreter::execute_instruction(istringstream instruction)
     instruction >> cols;
 
     grid.make_grid(rows, cols);
-    grid.draw_universe();
 
   } else if (instr == "make_robot") {
-    string name;
-    TDT4102::Point pos;
-    string color;
+    string robot_name;
+    string robot_color;
+    int x;
+    int y;
 
-    instruction >> name;
-    instruction >> pos.x;
-    instruction >> pos.y;
-    instruction >> color;
-
-    grid.make_robot(name,pos, get_color(color));
+    instruction >> robot_name >> x >> y >> robot_color;
+    grid.make_robot(robot_name, {x, y}, get_color(robot_color));
   } else if (instr == "clear_robots") {
     grid.clear_robots();
+
   } else if (instr == "move_robot") {
-    TDT4102::Point pos;
-    string name;
-    instruction >> name;
-    instruction >> pos.x;
-    instruction >> pos.y;
-    grid.move_robot(name, pos);
+    string robot_name;
+    int x, y;
+
+    instruction >> robot_name >> x >> y;
+    grid.move_robot(robot_name, {x, y});
+
   } else if (instr == "recolor_robot") {
-    string name;
-    string Color;
-    instruction >> name;
-    instruction >> Color;
+    string robot_name, robot_new_color;
+    instruction >> robot_name >> robot_new_color;
+    grid.recolor_robot(robot_name, get_color(robot_new_color));
 
-    grid.recolor_robot(name, get_color(Color));
   } else if (instr == "rename_robot") {
+    string robot_name, robot_new_name;
+    instruction >> robot_name >> robot_new_name;
+    grid.rename_robot(robot_name, robot_new_name);
 
-    string name;
-    string new_name;
-    instruction >> name;
-    instruction >> new_name;
-
-    grid.rename_robot(name, new_name);
   } else if (instr == "delete_robot") {
-    string name;
-    instruction>>name;
-    grid.delete_robot(name);
+    string robot_name;
+    instruction >> robot_name;
+    grid.delete_robot(robot_name);
+
   } else {
     // Don't change this
     throw string("Invalid command " + instr);
   }
-
-  (void)grid;
 
   // END: S2
 }

@@ -29,10 +29,8 @@ src = []
 exe = executable(
   'program',
   src,
-'LinkedList.cpp',
+'Gameoflife.cpp',
 'main.cpp',
-'oppgave_en.cpp',
-'person.cpp',
   dependencies : [animationwindow_dep, sdl2_dep],
   cpp_args : compiler_flags
 )

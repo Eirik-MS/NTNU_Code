@@ -2,7 +2,7 @@
 
 // Task G1: drawing grid lines
 //
-// Implement the code for lines of the robot grid,
+// Implement the code for drawing the lines of the robot grid,
 // i.e. the RobotGrid::draw_grid_lines()-function. To solve this
 // assignment, use the window.draw_line() function to draw the lines
 // and the following class-defined variables to determine the layout of
@@ -20,30 +20,14 @@ void RobotGrid::draw_grid_lines()
     // Write your answer to assignment G1 here, between the // BEGIN: G1
     // and // END: G1 comments. You should remove any code that is
     // already there and replace it with your own.
-  // iterer gjennom alle radene og colonnene
 
-  for (int rows_num = 0; rows_num < rows+1; rows_num++){ 
-    window.draw_line(
-          TDT4102::Point{
-            x_pos, y_pos + rows_num*cell_width
-          },
-          TDT4102::Point{
-            target_w_size, y_pos + rows_num*cell_width
-          }
-        );
-  }
+    for (int i = x_pos; i < x_pos + w_size + 1; i = i + cell_width) {
+        window.draw_line({i, y_pos}, {i, y_pos + h_size});
+    }
+    for (int i = y_pos; i < y_pos + h_size + 1; i = i + cell_height) {
+        window.draw_line({x_pos, i}, {x_pos + w_size, i});
+    }
 
-  for (int cols_num =0; cols_num < cols+1; cols_num++){
-    window.draw_line(
-      TDT4102::Point{
-        x_pos + cols_num*cell_width, y_pos
-      },
-      TDT4102::Point{
-        x_pos + cols_num*cell_width, target_h_size
-      }
-    );
-  }
-  
     // END: G1
 }
 
@@ -66,12 +50,10 @@ Point RobotGrid::get_grid_cell_center_coord(int x, int y) const
   // and // END: G2 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  TDT4102::Point center = {
-    x_pos + x*cell_width + cell_width/2,
-    y_pos + y*cell_height + cell_height/2
-  };
+  int xp = x_pos + (cell_width * x) + (cell_width / 2);
+  int yp = y_pos + (cell_height * y) + (cell_height / 2);
+  return {xp, yp};
 
-  return center; 
   // END: G2
 }
 
@@ -88,17 +70,21 @@ Point RobotGrid::get_grid_cell_center_coord(int x, int y) const
 // described in task S2 in order to test this code. Note that the
 // robots will not get the correct color before task S1 has been
 // solved.
-void RobotGrid::make_robot(string name, Point pos, Color color){
-
+void RobotGrid::make_robot(string name, Point pos, Color color)
+{
   check_name_available(name);
   check_coord_bounds(pos);
   check_coord_empty(pos, name, false);
 
-  //BEGIN: G3
-  robots.emplace(name, new Robot{name, pos, color});
-  return;
+  // BEGIN: G3
+  //
+  // Write your answer to assignment G3 here, between the // BEGIN: G3
+  // and // END: G3 comments. You should remove any code that is
+  // already there and replace it with your own.
 
-  //END: G3
+  robots.insert({name,make_unique<Robot>(name, pos, color)});
+
+  // END: G3
 }
 
 // Task G4: Drawing the robots
@@ -119,17 +105,10 @@ void RobotGrid::draw_robots()
   // and // END: G4 comments. You should remove any code that is
   // already there and replace it with your own.
 
-for (auto it = robots.begin(); it != robots.end(); ++it) {
-    window.draw_circle(get_grid_cell_center_coord(it->second->pos),
-                       cell_width/2,
-                       it->second->color);
-    window.draw_text(get_grid_cell_edge_coord(it->second->pos),
-                     it->second->name);
-
+  for(const auto & r : robots){
+    window.draw_circle(get_grid_cell_center_coord(r.second->pos),min(cell_height/2.0,cell_width/2.0), r.second->color);
+    window.draw_text(get_grid_cell_edge_coord(r.second->pos),r.first);
   }
-
-  return;
-  
 
   // END: G4
 }
@@ -154,7 +133,7 @@ void RobotGrid::delete_robot(string name)
   // already there and replace it with your own.
 
   robots.erase(name);
-  return;
+
   // END: G5
 }
 
@@ -179,8 +158,8 @@ void RobotGrid::move_robot(string name, Point pos)
   // and // END: G6 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  robots.at(name).get()->pos = pos;
-  return;
+  robots.at(name)->pos = pos;
+
   // END: G6
 }
 
@@ -198,8 +177,8 @@ void RobotGrid::recolor_robot(string name, Color color)
   // and // END: G7 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  robots.at(name).get()->color = color;
-  return;
+  robots.at(name)->color = color;
+
   // END: G7
 
 }
@@ -217,7 +196,7 @@ void RobotGrid::clear_robots()
   // already there and replace it with your own.
 
   robots.clear();
-  return;
+
   // END: G8
 
 }
@@ -229,7 +208,6 @@ void RobotGrid::clear_robots()
 // robot's key in the robots map! Thus, there is more to this than
 // simply changing the name field of a Robot
 // object.
-
 void RobotGrid::rename_robot(string name, string new_name)
 {
   check_name_exists(name);
@@ -240,18 +218,13 @@ void RobotGrid::rename_robot(string name, string new_name)
   // Write your answer to assignment G9 here, between the // BEGIN: G9
   // and // END: G9 comments. You should remove any code that is
   // already there and replace it with your own.
-  
-  //unique_ptr<Robot> newbot (new Robot(name, pos, color));
 
-  auto node = robots.extract(name);
-  node.key() = new_name;
-  robots.insert(move(node));
+  Point pos = robots.at(name)->pos;
+  Color col = robots.at(name)->color;
+  delete_robot(name);
+  make_robot(new_name, pos, col);
 
-  robots.at(new_name).get()->name = new_name;
-
-  
-  return;
-// END: G9
+  // END: G9
 }
 
 // Task G10: Checking coordinate bounds
@@ -268,14 +241,14 @@ void RobotGrid::check_coord_bounds(Point p) const
   // Write your answer to assignment G10 here, between the // BEGIN: G10
   // and // END: G10 comments. You should remove any code that is
   // already there and replace it with your own.
-  bool row_good = 0 <= p.x && p.x < cols;
-  bool col_good = 0 <= p.y && p.y < rows;
-  
-  if(!(row_good && col_good)){
-    throw string("Cordinates that were enterd is out of bounds ");
+
+  if(p.x < 0 || p.x >= cols){
+    throw invalid_argument("x coordinate is out of bounds.");
+  }
+  else if(p.y < 0 || p.y >= rows){
+    throw invalid_argument("y coordinate is out of bounds.");
   }
 
-  return;
   // END: G10
 
 }
@@ -295,11 +268,9 @@ void RobotGrid::check_name_available(string name) const
   // and // END: G11 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  if(robots.count(name)!=0){
-    throw string("name not available");
+  if(robots.find(name) != robots.end()){
+    throw invalid_argument("The robot name '" + name + "' is already in use.");
   }
-
-  return;
 
   // END: G11
 }
@@ -319,13 +290,10 @@ void RobotGrid::check_name_exists(string name) const
   // and // END: G12 comments. You should remove any code that is
   // already there and replace it with your own.
 
-    if(robots.count(name)==0){
-    throw string("name does not exist");
+  if(robots.find(name) == robots.end()){
+    throw invalid_argument("No robot named '" + name + "' exists.");
   }
 
-  // G11 and G12 IS identical, redundant code. Just return a bool
-
-  return;
   // END: G12
 
 }
@@ -364,15 +332,14 @@ void RobotGrid::check_coord_empty(Point p, string name, bool is_moving) const
   // and // END: G13 comments. You should remove any code that is
   // already there and replace it with your own.
 
-
-    for (auto it = robots.begin();it != robots.end(); ++it){
-      if (p.x == it->second.get()->pos.x && p.y == it->second.get()->pos.y){
-        if (name != it->second.get()->name){
-          throw string("This position is not available");
-        }
+  for(const auto & r : robots){
+    Point curr_pos = r.second->pos;
+    if(curr_pos.x == p.x && curr_pos.y == p.y){
+      if(name != r.first || !is_moving){
+        throw invalid_argument("There is already a robot at this position.");
       }
     }
-  
+  }
   // END: G13
 
 }
