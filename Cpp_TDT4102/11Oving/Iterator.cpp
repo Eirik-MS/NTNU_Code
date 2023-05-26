@@ -1,4 +1,4 @@
-#include "oppgave_en.h"
+#include "Iterator.h"
 
 void replace(std::vector<std::string>& vec, std::string old, std::string replacement){
 	for (int i = 0; i<vec.size(); i++){
