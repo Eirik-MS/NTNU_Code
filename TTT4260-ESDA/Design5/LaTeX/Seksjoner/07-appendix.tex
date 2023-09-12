@@ -1,0 +1,36 @@
+\appendix
+%Tillegg. Flere tillegg legges til ved å lage flere sections:-----------------
+\section{Fullstendige utregninger}\label{ax:math}
+
+\subsection{Bestemmelse av komponentverdier}
+
+Bruker (\ref{eq:V_B}) slik at
+
+\begin{equation}
+    \begin{split}
+         V_\text{B} &= \frac{(V_{\text{CC}}-V_\text{T})}{2}+V_\text{T} \\
+         &= \frac{(6-0.7)}{2}+0.7 \\
+         &= 3.35\text{V}
+    \end{split}
+\end{equation}
+
+Bruker (\ref{eq:R_B1}) slik at
+
+\begin{equation}
+    \begin{split}
+        R_{\text{B}1} &= \frac{V_{\text{CC}R_{\text{B}2}}}{V_\text{B}}-R_{\text{B}2} \\
+        &= 546\text{k}\Omega \\
+        &\approx 470\text{k}\Omega
+    \end{split}
+\end{equation}
+
+Lar $I_\text{E}=10\text{mA}$ og bruker (\ref{eq:R_E}) slik at
+
+\begin{equation}
+    \begin{split}
+        R_\text{E} &= \frac{(V_\text{B}-V_\text{T})}{I_\text{E}} \\
+        &= \frac{(4.05-0.7)}{10\cdot10^{-3}} \\
+        &= 335\Omega \\
+        &\approx 330\Omega
+    \end{split}
+\end{equation}

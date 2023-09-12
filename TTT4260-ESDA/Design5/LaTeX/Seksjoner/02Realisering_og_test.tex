@@ -1,0 +1,43 @@
+\newpage
+\section{Realisering}
+\label{realiseringOgTest}
+
+\subsection[short]{Bestemme verdier}
+\label{bestemmeVerdier}
+
+For å bestemme verdiene til komponentene i kretsen så må det først bestemmes hvilke krav som stilles til kretsen. Det er ønskelig med så høy ingangsmotstand og så lav utgangsmotstand som mulig og at kretsen skal kunne levere mye strøm. %OPA454 er en moderne høy strøms operasjonsforsterker som kan levere 50mA. 
+Det er derfor ønskelig at kretsen skal kunne levere minst 50mA.
+
+Vi starter med å definere arbeidspunktet og $I_E$. Arbeidspunktet settes til midten av spenningsforsyningen, pluss . $I_E$ settes til 50m, og arbeidspunktet settes ved å bruke formel \ref{eq:arbeidspunkt}. 
+
+\begin{equation}
+\label{eq:arbeidspunkt}
+\begin{split}
+V_B &= \frac{V_{CC} - V_{BE}}{2} + V_{BE}\\
+%V_B &= \frac{7V - 1,4V}{2} + 1,4V = 4.2V
+\end{split}
+\end{equation}
+
+
+\vspace{1cm}
+\begin{table}[!h]
+\centering % Denne kommandoen sentrerer tabellen i kolonnen. 
+\caption{Beregna verdier.}
+\label{tab:vars}	% Merkelappen vi vil referere til.
+\begin{tabular}{lll} % Her angir det andre argumentet at vi vil ha to senterjusterte kolonner (l = left, c = center, r = right).
+\toprule % Horisontal linje som markerer toppen av tabellen
+\textbf{Variabel/komponent} & \textbf{Verdi} & \textbf{Kommentar} \\
+\midrule
+$V_{\text{CC}}$ & $6\text{V}$ & \\
+$V_\text{T}$ & $0.7\text{V}$ & \\
+$R_{\text{B}2}$ & $470\text{k}\Omega$ & inngangsimpedansen må være høy i en buffer \\
+$I_\text{E}$ & $10\text{mA}$ & \\
+$V_\text{B}$ & $4.2\text{V}$ & \\
+$R_{\text{B}1}$ & $690\text{k}\Omega$ & \\
+$R_\text{E}$ & $330\Omega$ & utgangsimpedansen er lav i en buffer \\
+$C_1$ & $1\mu\text{F}$ & \\
+$C_2$ & $1\mu\text{F}$ & \\
+\bottomrule 
+\end{tabular}
+\end{table}
+\vspace{1cm}
