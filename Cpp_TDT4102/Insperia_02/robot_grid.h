@@ -28,7 +28,7 @@ private:
 
     // Private functions
     void draw_robots();
-    void draw_grid_lines();
+    
     Point get_grid_cell_center_coord(int x, int y) const;
     Point get_grid_cell_center_coord(Point pos) const;
     Point get_grid_cell_edge_coord(int x, int y) const;
@@ -44,6 +44,7 @@ public:
 
     // Draw the universe
     void draw_universe();
+    void draw_grid_lines();
 
     // Operations
     void make_grid(int rows, int cols);
@@ -53,6 +54,6 @@ public:
     void recolor_robot(string name, Color color);
     void clear_robots();
     void rename_robot(string name, string new_name);
-
+    
 
 };

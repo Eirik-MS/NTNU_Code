@@ -1,0 +1,117 @@
+%Dokumentinnstillinger:---------------------------------
+%Ved å google flitting kan du finne ut hva de forskjellige tingene her betyr, og hvordan du kan gjøre eventuelle endringer.
+\documentclass[a4paper,11pt,norsk]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{a4wide}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\setlength{\parindent}{0pt} 
+\setlength{\parskip}{2ex}
+\usepackage{fixltx2e}
+\usepackage{amsmath}
+\usepackage[pdftex, pdfborderstyle={/S/U/W 0}]{hyperref}
+\usepackage{graphicx}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage[european]{circuitikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\usepackage{floatrow}
+\floatsetup[table]{capposition=top}
+% \usepackage[europeanresistors]{circuitikz}
+\tikzset{opampdownlbl/.style={
+            below,
+            draw=none,
+            append after command={
+                (\tikzlastnode.north) edge ([shift={(-5pt,0pt)}]\tikzlastnode.north) edge ([shift={(+5pt,0pt)}]\tikzlastnode.north)
+            }},
+        opampuplbl/.style={
+            above,
+            draw=none,
+            append after command={
+                (\tikzlastnode.south) edge ([shift={(-5pt,0pt)}]\tikzlastnode.south) edge ([shift={(+5pt,0pt)}]\tikzlastnode.south)
+            }}}
+
+% roman numerals
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\usepackage{csquotes}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{dirtytalk}
+\usepackage{booktabs} % Denne pakken gir tilgang på endel ekstra kommandoer som legger til rette for god skikk og bruk i tabellformatering.
+\usepackage{multirow}
+\usepackage[font=small,labelfont=bf]{caption}	% Justering av LaTeX standarder for figurtekst og tabelltekst.
+
+\begin{document}
+
+%Headingdel:---------------------------------------------
+\begin{minipage}[c]{0.15\textwidth}
+\includegraphics[width=2.0cm]{elsys_pos_staaende_ntnu}  
+\end{minipage}
+\begin{minipage}[c]{0.85\textwidth}
+
+\renewcommand{\arraystretch}{1.7}
+\large 
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\multicolumn{2}{|l|}{} \\
+\multicolumn{2}{|l|}{\huge \textbf{Designnotat}} \\
+\multicolumn{2}{|l|}{}  \\
+\hline
+\multicolumn{2}{|l|}{Tittel: 
+%Skriv inn tittel her:------------------------------------------
+Bufferkrets
+} \\
+\hline
+\multicolumn{2}{|l|}{Forfattere: 
+%Skriv inn forfattere her:--------------------------------------
+Mia Elisenberg
+} \\
+\hline
+%Skriv inn versjon og dato her her:-----------------------------
+Versjon: 2.0 & Dato: \today
+\\
+\hline 
+\end{tabularx}
+\end{minipage}
+\normalsize
+
+%Automatisk generert innholdsfortegnelse:------------------
+
+\setlength{\parskip}{0ex}
+\renewcommand{\baselinestretch}{0.1}\normalsize
+\tableofcontents
+\renewcommand{\baselinestretch}{1.00}\normalsize
+\setlength{\parskip}{2ex}
+\rule{\textwidth}{1pt}
+
+
+\newpage
+
+%Selve rapporten:------------------------------------------
+
+\input{body/01-problem}\clearpage
+\input{body/02-prinsipp}\clearpage
+\input{body/03-realisering}\clearpage
+\input{body/04-konklusjon}\clearpage
+\input{body/05-takk}\clearpage
+
+
+
+
+%Bibliografi: Legg til flere elementer ved å legge til flere \bibitem:--------
+\input{body/06-bib}
+
+
+\newpage
+
+
+\input{body/07-appendix}
+
+\end{document}

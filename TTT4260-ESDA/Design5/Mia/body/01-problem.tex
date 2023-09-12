@@ -1,0 +1,43 @@
+\section{Problembeskrivelse}
+\label{sec:innledning}
+
+En utfordring i et system kan være at en signalkilde ikke klarer å levere nok strøm til en last. Det kan hende at spenningsnivået er høyt nok, men strømstyrken er ikke nok til å levere effekten lasten krever. En løsning på dette problemet er å bruke en buffer. Konseptet for et slikt system vises i figuren under.
+
+\vspace{1cm}
+\begin{figure}[!h]
+    \centering
+    \begin{circuitikz} [american voltages]
+    \draw
+    (0,1) to (0,0) node[ground]{}
+    (0,2) to [V=$v_0$] (0,1)
+    (0,2) to (0,3)
+    
+    (0,3) to [R, l^=$R_\text{K}$] (3,3)
+    
+    (3,3) to [short, -*] (4,3)
+    (4,3.5) node[]{$v_1$}
+    
+    (4,3) to (5.5,3)
+    (6,3) node[buffer]{}
+    
+    (6.5,3) to [short, -*] (7.5,3)
+    (7.5,3.5) node[]{$v_2$}
+    
+    (7.5,3) to [short,-] (10,3)
+    (10,3) to [R, l^=$R_\text{L}$] (10,0.5)
+    
+    (10,0.5) to (10,0) node[ground]{}
+    ;
+    \end{circuitikz}
+    \caption{En bufferkrets med en kilde, buffer og last.}
+    \label{fig:01}
+\end{figure}
+\vspace{1cm}
+
+Systemet i figur \ref{fig:01} har en spenningskilde $v_0$, en utgangsmotstand $R_\text{K}$ for kilden, en last $R_\text{L}$ og en buffer med inngangssignal $v_1$ og utgangssignal $v_2$. Bufferen må være slik at
+
+\begin{equation}
+    v_2 \approx v_1 \approx v_0
+\end{equation}
+
+og den må være mest mulig uavhengig av $R_\text{K}$ og $R_\text{L}$ for å gi et presist resultat.

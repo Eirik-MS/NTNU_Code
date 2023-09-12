@@ -1,0 +1,72 @@
+\section{Prinsipiell løsning}
+\label{sec:prinsipielllosning}
+
+Det er designet et system ved hjelp av diskrete komponenter for å gjøre resultatet av bufferen så presist som mulig, og kretstopologien vises i figur \ref{fig:02}. Den baserer seg på en NPN-transistor og skal konfigures slik at inngangsmotstanden er høy, og utgangssmotstanden er lav. Dette gjør at systemet kan ha en stor last og en inngangskilde som har en større eller ikke ideell utgangssmotstand. Forsterkningsfaktoren til systemet er tilnærmet lik 1, som vil si at inngangssignalet er tilnærmet lik utgangssignalet, og man har en buffer.
+
+\vspace{1cm}
+\begin{figure}[!h]
+    \centering
+    \begin{circuitikz} [american voltages]
+    \draw
+    % (0,0) to [short,*-] (1,0)
+    (0,0.5) node[]{$v_1$}
+    
+    (0,0) to [C, l^=$C_1$, *-*] (3,0)
+    
+    % (2,0) to [short,-*] (3,0)
+    
+    (3,0) to [R,l^=$R_{\text{B}1}$] (3,3)
+    (3,3) to [short,-*] (10,3)
+    (10,3.5) node[]{$V_{\text{CC}}$}
+    
+    (3,0) to [R,l_=$R_{\text{B}2}$] (3,-3)
+    (3,-3) to [short,-*] (0,-3)
+    
+    (3,0) to [short,-*] (4.5,0)
+    (4.5,0.5) node[]{$V_\text{B}$}
+    
+    (4.5,0) to (5.5,0)
+    (6,0) to node[npn] (npn) {} (6,0)
+    
+    (6,0.6) to [short,-*] (6,1)
+    (5.5,1) node[]{$V_\text{C}$}
+    (6,1) to (6,3)
+    
+    (6,-0.6) to [short,-*] (6,-1)
+    (5.5,-1) node[]{$V_\text{E}$}
+    (6,-1) to [R,l_=$R_\text{E}$] (6,-3)
+    
+    (6,-1) to [C, l^=$C_2$, -*] (10,-1)
+    (10,-0.5) node[]{$v_2$}
+    
+    (3,-3) to [short,-*] (10,-3)
+    
+    (5,-3) to (5,-3.5) node[ground]{}
+    ;
+    \end{circuitikz}
+    \caption{Kretstopologien til en buffer basert på en NPN-transistor.}
+    \label{fig:02}
+\end{figure}
+\vspace{1cm}
+
+Bufferkretsen i figur \ref{fig:02} består av $v_1$ og $v_2$ som i figur \ref{fig:01} og en forskyningsspenning $V_{\text{CC}}$, i tillegg til motstandene $R_{\text{B}1}$, $R_{\text{B}2}$ og $R_\text{E}$ og kondensatorene $C_1$ og $C_2$.
+
+For å bestemme komponentverdiene, så må en først bestemme verdien av $V_{\text{CC}}$. En kan så styre spenningsfallet over transistorens base. Transistoren vil kunne svinge mellom $V_{\text{CC}}$ og terskelspenninga $V_\text{T}$. Ved å la base-spenninga $V_\text{B}$ være middelverdien av dette, så vil en oppnå mest mulig svingning for $v_1$. Med hensyn til $V_\text{T}$, så vil dette være
+
+\begin{equation}
+    V_\text{B} = \frac{(V_{\text{CC}}-V_\text{T})}{2}+V_\text{T}
+\end{equation}\label{eq:V_B}
+
+Verdien av $V_\text{B}$ er også gitt av en spenningsdeler bestående av $R_{\text{B}1}$ og $R_{\text{B}2}$, og ved å selv bestemme en verdi av $R_{\text{B}2}$, så får en at verdien til $R_{\text{B}1}$, er gitt ved
+
+\begin{equation}
+    V_\text{B} = \frac{R_{\text{B}2}}{(R_{\text{B}1}+R_{\text{B}2})}V_{\text{CC}} \implies R_{\text{B}1} = \frac{V_{\text{CC}}R_{\text{B}2}}{V_\text{B}}-R_{\text{B}2}
+\end{equation}\label{eq:R_B1}
+
+Det er viktig å ha en korrekt verdi for $R_\text{E}$ for å forhindre at transistoren overopphetes. En velger en trygg verdi for strømmen $I_\text{E}$ gjennom transistorens emitter, slik at overoppheting ikke skjer. Ved å så bruke Ohms lov, så finner en at
+
+\begin{equation}
+    V_\text{E} = R_\text{E}I_\text{E} \implies R_\text{E}=\frac{V_\text{E}}{I_\text{E}} = \frac{(V_\text{B}-V_\text{T})}{I_\text{E}}
+\end{equation}\label{eq:R_E}
+
+Både $C_1$ og $C_2$ vil blokkere DC-signaler og kun la AC-signaler komme gjennom. Disse trenger kun å være tilstrekkelig store.

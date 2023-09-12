@@ -21,7 +21,8 @@ void RobotGrid::draw_grid_lines()
     // and // END: G1 comments. You should remove any code that is
     // already there and replace it with your own.
   // iterer gjennom alle radene og colonnene
-  for (int rows_num = 0; rows_num > rows; rows_num++){ 
+
+  for (int rows_num = 0; rows_num < rows+1; rows_num++){ 
     window.draw_line(
           TDT4102::Point{
             x_pos, y_pos + rows_num*cell_width
@@ -32,7 +33,7 @@ void RobotGrid::draw_grid_lines()
         );
   }
 
-  for (int cols_num =0; cols_num > cols; cols_num++){
+  for (int cols_num =0; cols_num < cols+1; cols_num++){
     window.draw_line(
       TDT4102::Point{
         x_pos + cols_num*cell_width, y_pos
@@ -66,8 +67,8 @@ Point RobotGrid::get_grid_cell_center_coord(int x, int y) const
   // already there and replace it with your own.
 
   TDT4102::Point center = {
-    x_pos + x*cell_width - cell_width/2,
-    y_pos + y*cell_height - cell_height/2
+    x_pos + x*cell_width + cell_width/2,
+    y_pos + y*cell_height + cell_height/2
   };
 
   return center; 
@@ -119,8 +120,7 @@ void RobotGrid::draw_robots()
   // already there and replace it with your own.
 
 for (auto it = robots.begin(); it != robots.end(); ++it) {
-    window.draw_circle(get_grid_cell_center_coord(it->second->pos.x,
-                                                  it->second->pos.y),
+    window.draw_circle(get_grid_cell_center_coord(it->second->pos),
                        cell_width/2,
                        it->second->color);
     window.draw_text(get_grid_cell_edge_coord(it->second->pos),
@@ -229,35 +229,30 @@ void RobotGrid::clear_robots()
 // robot's key in the robots map! Thus, there is more to this than
 // simply changing the name field of a Robot
 // object.
-void RobotGrid::rename_robot(string name, string new_name){
-  (void)name;
-  (void)new_name;
+
+void RobotGrid::rename_robot(string name, string new_name)
+{
+  check_name_exists(name);
+  check_name_available(new_name);
+
+  // BEGIN: G9
+  //
+  // Write your answer to assignment G9 here, between the // BEGIN: G9
+  // and // END: G9 comments. You should remove any code that is
+  // already there and replace it with your own.
+  
+  //unique_ptr<Robot> newbot (new Robot(name, pos, color));
+
+  auto node = robots.extract(name);
+  node.key() = new_name;
+  robots.insert(move(node));
+
+  robots.at(new_name).get()->name = new_name;
+
+  
   return;
+// END: G9
 }
-//void RobotGrid::rename_robot(string name, string new_name)
-//{
-//  check_name_exists(name);
-//  check_name_available(new_name);
-//
-//  // BEGIN: G9
-//  //
-//  // Write your answer to assignment G9 here, between the // BEGIN: G9
-//  // and // END: G9 comments. You should remove any code that is
-//  // already there and replace it with your own.
-//  
-//  //unique_ptr<Robot> newbot (new Robot(name, pos, color));
-//
-//  TDT4102::Point pos;
-//  TDT4102::Color color;
-//
-//  pos = robots.at(name).get()->pos;
-//  color = robots.at(name).get()->color;
-//
-//  robots.emplace(new_name, Robot{new_name, pos, color});
-//  
-//  return;
-//  // END: G9
-//}
 
 // Task G10: Checking coordinate bounds
 //
@@ -301,7 +296,7 @@ void RobotGrid::check_name_available(string name) const
   // already there and replace it with your own.
 
   if(robots.count(name)!=0){
-    //throw string("name not available");
+    throw string("name not available");
   }
 
   return;

@@ -1,0 +1,12 @@
+\babel@toc {norsk}{}\relax 
+\contentsline {section}{\numberline {1}Problembeskrivelse}{2}{section.1}%
+\contentsline {section}{\numberline {2}Prinsipiell løsning}{3}{section.2}%
+\contentsline {section}{\numberline {3}Realisering, test og diskusjon}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Test under ideelle forhold}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Test med reell last og kilde}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Diskusjon}{9}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Konklusjon}{11}{section.4}%
+\contentsline {section}{\numberline {5}Takk}{12}{section.5}%
+\contentsline {section}{Referanser}{13}{section*.10}%
+\contentsline {section}{\numberline {A}Fullstendige utregninger}{14}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Bestemmelse av komponentverdier}{14}{subsection.A.1}%

@@ -19,9 +19,20 @@ string Application::load_program(string file_name)
   // Write your answer to assignment A1 here, between the // BEGIN: A1
   // and // END: A1 comments. You should remove any code that is
   // already there and replace it with your own.
+    string program;
+    std::filesystem::path file{file_name};
+    std::ifstream file_stream{file};
 
-  (void)file_name;
-  return "";
+    if (file_stream.is_open()) {
+        std::string line;
+        while (std::getline(file_stream, line)) {
+            program += line + "\n";
+        }
+    } else {
+        throw std::runtime_error("Could not open file");
+    }
+  
+  return program;
 
   // END: A1
 }
@@ -42,8 +53,11 @@ void Application::save_program(string file_name, string contents)
   // and // END: A2 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  (void)file_name;
-  (void)contents;
+  std::filesystem::path file{file_name};
+  std::ofstream output_stream{file};
+  output_stream << contents;
+  return;
+  
 
   // END: A2
 }
@@ -61,8 +75,8 @@ bool Application::is_int(const string& s)
   // and // END: A3 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  (void)s;
-  return false;
+    return std::regex_match(s, std::regex("-?[0-9]+([\.][0-9]+)?"));
+  
 
   // END: A3
 
@@ -115,7 +129,7 @@ void Application::run() {
 
 Application::Application() 
     : window(50, 50, 1024, 768, "Robot commander"),
-    grid{window, 10, 10, 650, 650, 1, 1},
+    grid{window, 10, 10, 650, 650, 4, 4},
     interpreter{grid},
     btn_run_program(TDT4102::Point{700, 230}, 300, 50, "Run program"),
     btn_load_program(TDT4102::Point{700, 280}, 300, 50, "Load program from file"),

@@ -88,7 +88,13 @@ void Interpreter::execute_instruction(istringstream instruction)
 
     grid.recolor_robot(name, get_color(Color));
   } else if (instr == "rename_robot") {
-    throw string("Instruction not implemented " + instr);
+
+    string name;
+    string new_name;
+    instruction >> name;
+    instruction >> new_name;
+
+    grid.rename_robot(name, new_name);
   } else if (instr == "delete_robot") {
     string name;
     instruction>>name;
