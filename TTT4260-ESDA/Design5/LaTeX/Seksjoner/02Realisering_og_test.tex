@@ -14,7 +14,49 @@ Vi starter med å definere arbeidspunktet og $I_E$. Arbeidspunktet settes til mi
 \label{eq:arbeidspunkt}
 \begin{split}
 V_B &= \frac{V_{CC} - V_{BE}}{2} + V_{BE}\\
-%V_B &= \frac{7V - 1,4V}{2} + 1,4V = 4.2V
+V_B &= \frac{7V - 1,4V}{2} + 1,4V = 4.2V
+\end{split}
+\end{equation}
+
+\begin{equation}
+\label{eq:IE}
+\begin{split}
+I_{E1} &= I_{C1} + I_{B}\\
+I_{E1} &= I_{B}(\beta + 1)\\
+I_{E} &= I_{C2} + I_{E1}\\
+I_{E} &= I_{B}(\beta + 1)^2 \\
+\end{split}
+\end{equation}
+
+\begin{equation}
+\label{eq:IB}
+\begin{split}
+I_{B} &= \frac{I_{E}}{(\beta + 1)^2} \\
+I_{B} &= \frac{50mA}{(330 + 1)^2} = 0.45\mu A
+\end{split}
+\end{equation}
+
+\begin{equation}
+\label{eq:R1}
+\begin{split}
+R_{1} &= \frac{V_{CC} - V_{B}}{I_{B}}\\
+R_{1} &= \frac{7V - 4.2V}{1000*0.45\mu A} = 6.2k\Omega
+\end{split}
+\end{equation}
+
+\begin{equation}
+\label{eq:R2}
+\begin{split}
+V_{R2} &= \frac{V_{CC} R_2}{R_1 + R_2}\\
+R2 &= \frac{V_{R2} R_1}{V_{CC}-V_{R2}}\\
+R2 &= \frac{4.2V 6.2k\Omega}{7V-4.2V} = 9.3k\Omega
+\end{split}
+\end{equation}
+
+\begin{equation}
+\label{eq:RE}
+\begin{split}
+R_{E} &= \frac{V_{B}}{I_{E}}?\\ 
 \end{split}
 \end{equation}
 
