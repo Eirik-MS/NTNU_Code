@@ -18,17 +18,12 @@ animationwindow_dep = dependency('animationwindow', fallback: ['animationwindow'
 # std_lib_facilities_dep = dependency('std_lib_facilities', fallback: ['std_lib_facilities', 'std_lib_facilities_dep'])
 
 
-src = []
+if host_machine.system() == 'linux'
+  compiler_flags = ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type']
+else
+  compiler_flags = ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type', '-fcolor-diagnostics', '-fansi-escape-codes']
+endif
 
-exe = executable(
-  'program',
-  src,
-'main.cpp',
-'oppgave1.cpp',
-'oppgave2.cpp',
-'oppgave3.cpp',
-'oppgave4.cpp',
-'oppgave5.cpp',
-  dependencies : [animationwindow_dep, sdl2_dep],
-  cpp_args : ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type', '-fcolor-diagnostics', '-fansi-escape-codes']
-)
+src = ['main.cpp']
+
+exe = executable('program', src, dependencies : [animationwindow_dep, sdl2_dep], cpp_args : compiler_flags)

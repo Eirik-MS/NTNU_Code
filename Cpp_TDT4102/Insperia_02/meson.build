@@ -24,16 +24,6 @@ else
   compiler_flags = ['-Wconversion', '-fdiagnostics-color=always', '-Werror=return-type', '-fcolor-diagnostics', '-fansi-escape-codes']
 endif
 
-src = []
+src = ['main.cpp']
 
-exe = executable(
-  'program',
-  src,
-'application.cpp',
-'interpreter.cpp',
-'main.cpp',
-'robot.cpp',
-'robot_grid.cpp',
-  dependencies : [animationwindow_dep, sdl2_dep],
-  cpp_args : compiler_flags
-)
+exe = executable('program', src, dependencies : [animationwindow_dep, sdl2_dep], cpp_args : compiler_flags)
