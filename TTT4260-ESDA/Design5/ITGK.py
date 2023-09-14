@@ -1,12 +1,15 @@
-def geo_rekke(r,tol):
 
+def geo_rekke(utrykk, toleranse):
     summ = 0
     n = 0
-    while True:
-        summ += r**n
+    forskjell = toleranse+1
+
+    while forskjell > toleranse:
+        gammel_summ = summ
+        summ += utrykk**n
+        forskjell = summ - gammel_summ
         n += 1
-        if r**n < tol:
-            break   
     return summ
 
-print(geo_rekke(0.5,0.0000001))
+print(geo_rekke(0.5, 0.00001))
+

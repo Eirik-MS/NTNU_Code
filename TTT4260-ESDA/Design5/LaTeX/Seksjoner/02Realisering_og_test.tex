@@ -8,58 +8,7 @@
 For å bestemme verdiene til komponentene i kretsen så må det først bestemmes hvilke krav som stilles til kretsen. Det er ønskelig med så høy ingangsmotstand og så lav utgangsmotstand som mulig og at kretsen skal kunne levere mye strøm. %OPA454 er en moderne høy strøms operasjonsforsterker som kan levere 50mA. 
 Det er derfor ønskelig at kretsen skal kunne levere minst 50mA.
 
-Vi starter med å definere arbeidspunktet og $I_E$. Arbeidspunktet settes til midten av spenningsforsyningen, pluss . $I_E$ settes til 50m, og arbeidspunktet settes ved å bruke formel \ref{eq:arbeidspunkt}. 
-
-\begin{equation}
-\label{eq:arbeidspunkt}
-\begin{split}
-V_B &= \frac{V_{CC} - V_{BE}}{2} + V_{BE}\\
-V_B &= \frac{7V - 1,4V}{2} + 1,4V = 4.2V
-\end{split}
-\end{equation}
-
-\begin{equation}
-\label{eq:IE}
-\begin{split}
-I_{E1} &= I_{C1} + I_{B}\\
-I_{E1} &= I_{B}(\beta + 1)\\
-I_{E} &= I_{C2} + I_{E1}\\
-I_{E} &= I_{B}(\beta + 1)^2 \\
-\end{split}
-\end{equation}
-
-\begin{equation}
-\label{eq:IB}
-\begin{split}
-I_{B} &= \frac{I_{E}}{(\beta + 1)^2} \\
-I_{B} &= \frac{50mA}{(330 + 1)^2} = 0.45\mu A
-\end{split}
-\end{equation}
-
-\begin{equation}
-\label{eq:R1}
-\begin{split}
-R_{1} &= \frac{V_{CC} - V_{B}}{I_{B}}\\
-R_{1} &= \frac{7V - 4.2V}{1000*0.45\mu A} = 6.2k\Omega
-\end{split}
-\end{equation}
-
-\begin{equation}
-\label{eq:R2}
-\begin{split}
-V_{R2} &= \frac{V_{CC} R_2}{R_1 + R_2}\\
-R_2 &= \frac{V_{R2} R_1}{V_{CC}-V_{R2}}\\
-R_2 &= \frac{4.2V 6.2k\Omega}{7V-4.2V} = 9.3k\Omega
-\end{split}
-\end{equation}
-
-\begin{equation}
-\label{eq:RE}
-\begin{split}
-R_{E} &= \frac{V_{B}}{I_{E}}?\\ 
-\end{split}
-\end{equation}
-
+Vi starter med å definere arbeidspunktet og $I_E$. Arbeidspunktet settes til midten av spenningsforsyningen. $I_E$ settes til 50mA, og arbeidspunktet settes ved å bruke formel \ref{eq:arbeidspunkt}. Siden utgangsmotstanden skal være så lav som mulig så setter vi den til å være $100\omega$
 
 
 \vspace{1cm}
@@ -71,13 +20,13 @@ R_{E} &= \frac{V_{B}}{I_{E}}?\\
 \toprule % Horisontal linje som markerer toppen av tabellen
 \textbf{Variabel/komponent} & \textbf{Verdi} & \textbf{Kommentar} \\
 \midrule
-$V_{\text{CC}}$ & $6\text{V}$ & \\
+$V_{\text{CC}}$ & $7\text{V}$ & \\
 $V_\text{T}$ & $0.7\text{V}$ & \\
-$R_{\text{B}2}$ & $470\text{k}\Omega$ & inngangsimpedansen må være høy i en buffer \\
-$I_\text{E}$ & $10\text{mA}$ & \\
+$R_{\text{B}2}$ & $6.2\text{k}\Omega$ & inngangsimpedansen må være høy i en buffer \\
+$I_\text{E}$ & $50\text{mA}$ & \\
 $V_\text{B}$ & $4.2\text{V}$ & \\
-$R_{\text{B}1}$ & $690\text{k}\Omega$ & \\
-$R_\text{E}$ & $330\Omega$ & utgangsimpedansen er lav i en buffer \\
+$R_{\text{B}1}$ & $9.3\text{k}\Omega$ & \\
+$R_\text{E}$ & $100\Omega$ & utgangsimpedansen er lav i en buffer \\
 $C_1$ & $1\mu\text{F}$ & \\
 $C_2$ & $1\mu\text{F}$ & \\
 \bottomrule 
@@ -86,7 +35,7 @@ $C_2$ & $1\mu\text{F}$ & \\
 \vspace{1cm}
 
 \subsection{Oppkobling og test}
-Kretsen ble deretter koblet opp i henhold til skjematikken i figur \ref{fig:Darlington_buffer} med verdiene fra tabellen i figur \ref{tab:vars}. For å få $V_{CC}$ på 7V så ble spenningsforsyningen på Analog Discovery satt til +5V og gjord ble satt til -2V.
+Kretsen ble deretter koblet opp i henhold til skjematikken i figur \ref{fig:Darlington_buffer} med verdiene fra tabellen i figur \ref{tab:vars}. For å få $V_{CC}$ på 7V så ble spenningsforsyningen på Analog Discovery satt til +5V og GND ble satt til -2V.
 
 \begin{figure}[H]
 \centering
@@ -136,7 +85,7 @@ Ved å utvide network målingen til å måle fra 1Hz til 5MHz så kan vi finne k
 \end{figure}
 
 
-
+Det ble deretter testet med et sinusformet signal på 1kHz for å se om kretsen klippet. Som vist i figur \ref{fig:Scope_Nice} så er signalet identisk med inngangssignalet opp til 500mV og klipper deretter ved 1V. Dette er innenfor det som er forventet.
 %Two png files next to each other
 
 \begin{figure}[H]
@@ -154,3 +103,4 @@ Ved å utvide network målingen til å måle fra 1Hz til 5MHz så kan vi finne k
         \label{fig:Scope_Unice}
     \end{minipage}
 \end{figure}
+
