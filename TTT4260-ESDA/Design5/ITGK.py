@@ -13,3 +13,5 @@ def geo_rekke(utrykk, toleranse):
 
 print(geo_rekke(0.5, 0.00001))
 
+intr = int(input("halla"))
+print(intr)
