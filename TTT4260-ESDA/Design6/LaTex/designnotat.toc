@@ -4,5 +4,5 @@
 \contentsline {section}{\numberline {3}Realisering}{4}{section.3}%
 \contentsline {section}{\numberline {4}Konklusjon}{4}{section.4}%
 \contentsline {section}{\numberline {5}Takk}{4}{section.5}%
-\contentsline {section}{Referanser}{5}{section*.3}%
+\contentsline {section}{Referanser}{5}{section*.6}%
 \contentsline {section}{\numberline {A}Fullstendige utregninger}{6}{appendix.A}%
