@@ -5,7 +5,7 @@
 \contentsline {subsection}{\numberline {3.1}Kretsopkobling}{4}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Målinger}{5}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Forbedringer}{5}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Konklusjon}{5}{section.4}%
-\contentsline {section}{\numberline {5}Takk}{5}{section.5}%
-\contentsline {section}{Referanser}{6}{section*.8}%
-\contentsline {section}{\numberline {A}Fullstendige utregninger}{7}{appendix.A}%
+\contentsline {section}{\numberline {4}Konklusjon}{6}{section.4}%
+\contentsline {section}{\numberline {5}Takk}{6}{section.5}%
+\contentsline {section}{Referanser}{7}{section*.8}%
+\contentsline {section}{\numberline {A}Fullstendige utregninger}{8}{appendix.A}%

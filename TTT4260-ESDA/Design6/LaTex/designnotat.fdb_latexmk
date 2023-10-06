@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1696277539 "c:/Users/eirik/Documents/Git/NTNU_Code/TTT4260-ESDA/Design6/LaTex/designnotat.tex" "designnotat.pdf" "designnotat" 1696277542 0
+["pdflatex"] 1696516174 "c:/Users/eirik/Documents/Git/NTNU_Code/TTT4260-ESDA/Design6/LaTex/designnotat.tex" "designnotat.pdf" "designnotat" 1696516177 0
   "Bibliografi/Bibliografi.tex" 1696241614 358 a55f0c6e6480b0d22a914fe483171326 ""
   "Bibliografi/Bibliografi_kode.tex" 1678440077 162 47eb5ea4aa3d971896778c950611a290 ""
   "Bilder/Spectrum_OPAMP_1_100KOhm.png" 1696277534 230663 c492e7aa19d46e8769454b8c4a699a54 ""
@@ -13,8 +13,8 @@
   "Overskrift_innholdsfortegnelse/Titteltekst.tex" 1695887390 839 f1a1edfe21e2be899d80e2f85b6286d9 ""
   "Seksjoner/00Problembeskrivelse.tex" 1696259539 1597 5af54bd5059213adf9e36108dfe4e9e0 ""
   "Seksjoner/01Prinsipiell_losning.tex" 1696259530 806 56f66ae7956dac4abdf5b01ceaf714b1 ""
-  "Seksjoner/02Realisering_og_test.tex" 1696277538 3960 f56694f51ee9f5cb8a4446240b2b7d9b ""
-  "Seksjoner/03Konklusjon.tex" 1693910500 46 5d7c376bc3b6acb0c6f214c526c9bd20 ""
+  "Seksjoner/02Realisering_og_test.tex" 1696515043 4186 23722408e790dbad1182402a56a8556c ""
+  "Seksjoner/03Konklusjon.tex" 1696516173 454 fd9e900339d5e0ab78280ef104b05823 ""
   "Seksjoner/04Takk.tex" 1693910500 61 f6054a64011063b4f68cb8639c097ae7 ""
   "Seksjoner/07-appendix.tex" 1695887369 141 6c90b8b2142d883a2b27b0f2d2b06140 ""
   "c:/Users/eirik/Documents/Git/NTNU_Code/TTT4260-ESDA/Design6/LaTex/designnotat.tex" 1695886895 648 2140aa43476f957ad86129503ba9f86c ""
@@ -238,10 +238,10 @@
   "c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1678037997 4662804 131178ccc9b2f4741a821427ce79dce1 ""
   "c:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1678038102 7879888 73cfde91ffd072c488581a9bf5d80e6f ""
   "c:/texlive/2022/texmf.cnf" 1678037978 713 e69b156964470283e0530f5060668171 ""
-  "designnotat.aux" 1696277542 4490 bd1b0227b42f7643ed27a3f574abd18f "pdflatex"
-  "designnotat.out" 1696277542 1137 e8a68bfd06fd89273650630d30e657a0 "pdflatex"
+  "designnotat.aux" 1696516176 4490 d341c7d40ada20d579e5a5710f545703 "pdflatex"
+  "designnotat.out" 1696516176 1137 e8a68bfd06fd89273650630d30e657a0 "pdflatex"
   "designnotat.tex" 1695886895 648 2140aa43476f957ad86129503ba9f86c ""
-  "designnotat.toc" 1696277542 737 3f9c5eae6a2dd27d4ead297bfa8edf04 "pdflatex"
+  "designnotat.toc" 1696516176 737 2b931d2c5d823e1574907e1dfe0fc64b "pdflatex"
   "packages.sty" 1696259508 2217 d58311610a736f431937c600b6c44dc6 ""
   (generated)
   "designnotat.aux"
