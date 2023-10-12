@@ -56,8 +56,8 @@ plt.subplot(212)
 plt.semilogx(Frequency, phase)
 plt.xlabel('Frequency (Hz)')
 plt.ylabel('Phase (deg)')
-plt.savefig(bodeWriteFile, dpi=600)
-#plt.show()
+#plt.savefig(bodeWriteFile, dpi=600)
+plt.show()
 
 # Save plot
 

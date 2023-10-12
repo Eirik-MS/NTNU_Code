@@ -48,5 +48,5 @@ plt.semilogx(max_gain_freq, red_gain, 'go', label='2489 Hz' + ', ' + str(round(r
 plt.legend()
 plt.xlabel('Frequency (Hz)')
 plt.ylabel('Gain (dB)')
-plt.savefig(spectrumWriteFile, dpi=600)
-#plt.show()
+#plt.savefig(spectrumWriteFile, dpi=600)
+plt.show()
