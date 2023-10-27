@@ -2,7 +2,7 @@
 \section{Realisering}
 \label{realiseringOgTest}
 
-\subsection[short]{Bestemme verdier}
+\subsection[Bestemme verdier]{Bestemme verdier}
 \label{bestemmeVerdier}
 
 For å bestemme verdiene til komponentene i kretsen så må det først bestemmes hvilke krav som stilles til kretsen. Det er ønskelig med så høy ingangsmotstand og så lav utgangsmotstand som mulig og at kretsen skal kunne levere mye strøm. %OPA454 er en moderne høy strøms operasjonsforsterker som kan levere 50mA. 
@@ -34,6 +34,7 @@ $C_2$ & $1\mu\text{F}$ & \\
 \end{table}
 \vspace{1cm}
 
+
 \subsection{Oppkobling og test}
 Kretsen ble deretter koblet opp i henhold til skjematikken i figur \ref{fig:Darlington_buffer} med verdiene fra tabellen i figur \ref{tab:vars}. For å få $V_{CC}$ på 7V så ble spenningsforsyningen på Analog Discovery satt til +5V og GND ble satt til -2V.
 
@@ -59,7 +60,7 @@ Kretsen ble først testet uten last og kildemotstand for å se om den fungerte s
 
 \subsubsection{Test med last}
 
-Så ble latstmotstand og kildemotstand koblet til kretsen. Kildemotstanden ble satt til 1.5k$\Omega$ og lastmotstanden ble satt til 170$\Omega$. Som vist i figur \ref{fig:Bodeplot+Pase_Second} så økte forvregningen av signalet. For å forbedre dette så ble det byttet til større kondensatorer, fra $1\mu$F til $16\mu$F og inngangsmotstanden ble økt ved å gange $R_1$ og $R_2$ med 100. Deretter ble det målt en forsterkning på EDIT og en faseforskyvning på EDIT grader. Dette kan ses i figur \ref{fig:Third}.
+Så ble latstmotstand og kildemotstand koblet til kretsen. Kildemotstanden ble satt til 1.5k$\Omega$ og lastmotstanden ble satt til 170$\Omega$. Som man ser i figur \ref{fig:Bodeplot+Pase_Second} så ble signalet svakere, og fasen ble forskøvet mye ved de lave frekvensene. Med en forsterkning på -4.2db så kan ikke kretsen lengere kvalifiseres som en buffer. Grunnen til at forsterkningen ble svakere er at inngangsmotstanden er for lav. For å forbedre dette så ble det byttet til større kondensatorer, fra $1\mu$F til $16\mu$F og inngangsmotstanden ble økt ved å gange $R_1$ og $R_2$ med 100. Deretter ble det målt en forsterkning på -1.26 db og en faseforskyvning på max $20\deg$ grader. Dette kan ses i figur \ref{fig:Third}.
 
 \begin{figure}[H]
 \centering
