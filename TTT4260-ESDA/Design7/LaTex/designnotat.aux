@@ -3,29 +3,57 @@
 \@nameuse{bbl@beforestart}
 \catcode `"\active 
 \providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \babel@aux{norsk}{}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Problembeskrivelse}{2}{section.1}\protected@file@percent }
 \newlabel{problemBeskrivelse}{{1}{2}{Problembeskrivelse}{section.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Et ideelt filter som tilfredstiller kravene til et Anti-Aliasing filter}}{2}{figure.caption.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Et ideelt filter som tilfredstiller kravene til et Anti-Aliasing filter\relax }}{2}{figure.caption.2}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:krav}{{1}{2}{Et ideelt filter som tilfredstiller kravene til et Anti-Aliasing filter}{figure.caption.2}{}}
+\newlabel{fig:krav}{{1}{2}{Et ideelt filter som tilfredstiller kravene til et Anti-Aliasing filter\relax }{figure.caption.2}{}}
+\citation{Nyquist}
+\citation{SallenKey}
+\citation{KS3}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Prinsipiell løsning}{3}{section.2}\protected@file@percent }
 \newlabel{prinsipiellLoesning}{{2}{3}{Prinsipiell løsning}{section.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Butterworth filter}{3}{subsection.2.1}\protected@file@percent }
 \newlabel{ButterworthFilter}{{2.1}{3}{Butterworth filter}{subsection.2.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Sallen-Key filteret}}{3}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:SallenKey}{{2}{3}{Sallen-Key filteret}{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Realisering}{4}{section.3}\protected@file@percent }
-\newlabel{realiseringOgTest}{{3}{4}{Realisering}{section.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Konklusjon}{4}{section.4}\protected@file@percent }
-\newlabel{konklusjon}{{4}{4}{Konklusjon}{section.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Takk}{4}{section.5}\protected@file@percent }
-\newlabel{takk}{{5}{4}{Takk}{section.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Sallen-Key filteret\relax }}{3}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:SallenKey}{{2}{3}{Sallen-Key filteret\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Finne orden av systemet}{3}{subsection.2.2}\protected@file@percent }
+\newlabel{eq:orden}{{1}{4}{Finne orden av systemet}{equation.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Valg av komponenter}{4}{subsection.2.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces $\zeta $-verdier for polpar, $i$, og systemorden, $n$.\relax }}{4}{table.caption.4}\protected@file@percent }
+\newlabel{tab:zeta}{{1}{4}{$\zeta $-verdier for polpar, $i$, og systemorden, $n$.\relax }{table.caption.4}{}}
+\newlabel{eq:Motstander}{{5}{5}{Valg av komponenter}{equation.2.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Realisering}{6}{section.3}\protected@file@percent }
+\newlabel{realiseringOgTest}{{3}{6}{Realisering}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Kretstopologi og bestemmelse av variabelverdier}{6}{subsection.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Beregna verdier.\relax }}{6}{table.caption.5}\protected@file@percent }
+\newlabel{tab:vars}{{2}{6}{Beregna verdier.\relax }{table.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Verdier for Sallen-Key-koblingene.\relax }}{6}{table.caption.6}\protected@file@percent }
+\newlabel{tab:verdier}{{3}{6}{Verdier for Sallen-Key-koblingene.\relax }{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Oppkobling av kretsen.\relax }}{7}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:oppkobling}{{3}{7}{Oppkobling av kretsen.\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Resultater}{7}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Amplituderesponsen til filteret.\relax }}{8}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:amplituderespons}{{4}{8}{Amplituderesponsen til filteret.\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Konklusjon}{8}{section.4}\protected@file@percent }
+\newlabel{konklusjon}{{4}{8}{Konklusjon}{section.4}{}}
 \bibcite{Problemstillingen}{1}
-\bibcite{Art of Eletronics}{2}
-\@writefile{toc}{\contentsline {section}{Referanser}{5}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Fullstendige utregninger}{6}{appendix.A}\protected@file@percent }
-\newlabel{ax:math}{{A}{6}{Fullstendige utregninger}{appendix.A}{}}
-\gdef \@abspage@last{6}
+\bibcite{KS3}{2}
+\bibcite{SallenKey}{3}
+\bibcite{Nyquist}{4}
+\@writefile{toc}{\contentsline {section}{Referanser}{9}{section*.9}\protected@file@percent }
+\gdef \@abspage@last{9}
