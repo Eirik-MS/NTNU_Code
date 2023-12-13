@@ -5,9 +5,10 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
+import scipy.signal as signal
 
 parser = argparse.ArgumentParser(description='A script with command-line arguments.')
-parser.add_argument('-d', '--dir', type=str, help='The directory to save the plot to. Defaults to current directory.', default='')
+parser.add_argument('-d', '--dir', type=str, help='The directory to save the plot to. Defaults to current directory.', default='\\')
 parser.add_argument('-f', '--file', type=str, help='The file to plot. Defaults to all files in the current directory.', default='')
 parser.add_argument('-ph', '--Phase', action='store_true', help='Plot phase as well')
 parser.add_argument('-ch_1', '--channel_1', type=str, help='Name of Channel 1, defaluts to Channel 1', default='Channel 1')
@@ -25,7 +26,7 @@ def find_spectrum_files():
 def get_spectrum_data(spectrum_files):
     data_dict = {}
     for file in spectrum_files:
-        data = np.loadtxt(file, delimiter=',', skiprows=1)
+        data = np.loadtxt(file, delimiter=',', skiprows=20)
         data_dict[file] = data
     return data_dict
 
@@ -44,7 +45,16 @@ def save_spectrum_plot(data_dict, args):
             strongest = data_dict[key][:,3]
             weakest = data_dict[key][:,1]
 
-
+        #Low pass filter the data
+        b, a = signal.butter(4, 0.1, btype='low', analog=False)   
+        strongest = signal.filtfilt(b,a, strongest)   
+        weakest = signal.filtfilt(b,a, weakest)
+        strongest = np.array(strongest)
+        weakest = np.array(weakest)
+        
+        strongest = 20 + strongest
+        weakest = 20 + weakest
+           
         if args.Phase:
             #generate two subplots one for voltage and one for phase
             fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
@@ -74,7 +84,7 @@ def save_spectrum_plot(data_dict, args):
         print('Saving plot to:')
         print(os.path.join(saveDir, key[:-4] + '.png'))
         savePath = os.getcwd() + os.path.join(saveDir, key[:-4] + '.png')
-        #print(savePath)
+        print(savePath)
         plt.savefig(savePath, dpi = 600)
         plt.clf()
 
