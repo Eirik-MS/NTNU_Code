@@ -2,8 +2,10 @@
 \contentsline {section}{\numberline {1}Problembeskrivelse}{2}{section.1}%
 \contentsline {section}{\numberline {2}Prinsipiell løsning}{3}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Butterworth filter}{3}{subsection.2.1}%
-\contentsline {section}{\numberline {3}Realisering}{4}{section.3}%
-\contentsline {section}{\numberline {4}Konklusjon}{4}{section.4}%
-\contentsline {section}{\numberline {5}Takk}{4}{section.5}%
-\contentsline {section}{Referanser}{5}{section*.4}%
-\contentsline {section}{\numberline {A}Fullstendige utregninger}{6}{appendix.A}%
+\contentsline {subsection}{\numberline {2.2}Finne orden av systemet}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Valg av komponenter}{4}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Realisering}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Kretstopologi og bestemmelse av variabelverdier}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Resultater}{7}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Konklusjon}{8}{section.4}%
+\contentsline {section}{Referanser}{9}{section*.9}%
