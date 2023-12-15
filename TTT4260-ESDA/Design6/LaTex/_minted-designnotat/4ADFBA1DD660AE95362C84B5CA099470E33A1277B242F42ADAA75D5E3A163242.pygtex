@@ -1,0 +1,151 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}find all files in current directory that start with \PYGZsq{}spectrum\PYGZsq{} and is a .csv file}
+
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+\PYG{k+kn}{import} \PYG{n+nn}{glob}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib.pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
+\PYG{k+kn}{import} \PYG{n+nn}{argparse}
+
+\PYG{n}{parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{description}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}A script with command\PYGZhy{}line arguments.\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}d\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}dir\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}The directory to save the plot to. Defaults to current directory.\PYGZsq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}f\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}file\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}The file to plot. Defaults to all files in the current directory.\PYGZsq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}ph\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}Phase\PYGZsq{}}\PYG{p}{,} \PYG{n}{action}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}store\PYGZus{}true\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Plot phase as well\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}ch\PYGZus{}1\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}channel\PYGZus{}1\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Name of Channel 1, defaluts to Channel 1\PYGZsq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Channel 1\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}ch\PYGZus{}2\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}channel\PYGZus{}2\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Name of Channel 2, defaluts to Channel 2\PYGZsq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Channel 2\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}thd\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}THD\PYGZsq{}}\PYG{p}{,} \PYG{n}{action}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}store\PYGZus{}true\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Plot THD as well\PYGZsq{}}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{find\PYGZus{}spectrum\PYGZus{}files}\PYG{p}{():}
+    \PYG{n}{spectrum\PYGZus{}files} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{for} \PYG{n}{file} \PYG{o+ow}{in} \PYG{n}{glob}\PYG{o}{.}\PYG{n}{glob}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}spectrum*.csv\PYGZdq{}}\PYG{p}{):}
+        \PYG{n}{spectrum\PYGZus{}files}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{file}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{spectrum\PYGZus{}files}
+
+\PYG{c+c1}{\PYGZsh{}get the data from the spectrum files and generate a plot for each file}
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}spectrum\PYGZus{}data}\PYG{p}{(}\PYG{n}{spectrum\PYGZus{}files}\PYG{p}{):}
+    \PYG{n}{data\PYGZus{}dict} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{k}{for} \PYG{n}{file} \PYG{o+ow}{in} \PYG{n}{spectrum\PYGZus{}files}\PYG{p}{:}
+        \PYG{n}{data} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{loadtxt}\PYG{p}{(}\PYG{n}{file}\PYG{p}{,} \PYG{n}{delimiter}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,} \PYG{n}{skiprows}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+        \PYG{c+c1}{\PYGZsh{}round firs collum to 0 decimals}
+        \PYG{n}{data}\PYG{p}{[:,}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[:,}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{l+m+mi}{0}\PYG{p}{)}  
+        \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{file}\PYG{p}{]} \PYG{o}{=} \PYG{n}{data}
+    \PYG{k}{return} \PYG{n}{data\PYGZus{}dict}
+
+\PYG{c+c1}{\PYGZsh{}save the data from the spectrum as a bodeplot}
+\PYG{k}{def} \PYG{n+nf}{save\PYGZus{}spectrum\PYGZus{}plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{,} \PYG{n}{args}\PYG{p}{):}
+    \PYG{n}{saveDir} \PYG{o}{=} \PYG{n}{args}\PYG{o}{.}\PYG{n}{dir}
+
+    
+    \PYG{k}{for} \PYG{n}{key} \PYG{o+ow}{in} \PYG{n}{data\PYGZus{}dict}\PYG{p}{:}
+        \PYG{n}{mag1} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{1}\PYG{p}{])}
+        \PYG{n}{mag2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{3}\PYG{p}{])}
+        \PYG{k}{if} \PYG{n}{np}\PYG{o}{.}\PYG{n}{max}\PYG{p}{(}\PYG{n}{mag1}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{n}{np}\PYG{o}{.}\PYG{n}{max}\PYG{p}{(}\PYG{n}{mag2}\PYG{p}{):}
+            \PYG{n}{strongest} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{1}\PYG{p}{]}
+            \PYG{n}{weakest} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{3}\PYG{p}{]}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{strongest} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{3}\PYG{p}{]}
+            \PYG{n}{weakest} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{1}\PYG{p}{]}
+
+
+        \PYG{k}{if} \PYG{n}{args}\PYG{o}{.}\PYG{n}{Phase}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{}generate two subplots one for voltage and one for phase}
+            \PYG{n}{fig}\PYG{p}{,} \PYG{p}{(}\PYG{n}{ax1}\PYG{p}{,} \PYG{n}{ax2}\PYG{p}{)} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{subplots}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{sharex}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+            \PYG{c+c1}{\PYGZsh{}plot the voltage}
+            \PYG{n}{ax1}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{strongest}\PYG{p}{)}
+            \PYG{n}{ax1}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{weakest}\PYG{p}{)}
+            \PYG{n}{ax1}\PYG{o}{.}\PYG{n}{set\PYGZus{}ylabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Voltage (V)\PYGZsq{}}\PYG{p}{)}
+            \PYG{n}{ax1}\PYG{o}{.}\PYG{n}{set\PYGZus{}title}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)}
+            \PYG{c+c1}{\PYGZsh{}plot the phase}
+            \PYG{n}{ax2}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{2}\PYG{p}{])}
+            \PYG{n}{ax2}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{5}\PYG{p}{])}
+            \PYG{n}{ax2}\PYG{o}{.}\PYG{n}{set\PYGZus{}ylabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Phase (deg)\PYGZsq{}}\PYG{p}{)}
+            \PYG{n}{ax2}\PYG{o}{.}\PYG{n}{set\PYGZus{}xlabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Frequency (Hz)\PYGZsq{}}\PYG{p}{)}
+            \PYG{c+c1}{\PYGZsh{}save the plot}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{strongest}\PYG{p}{)}
+            \PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{weakest}\PYG{p}{)}
+            \PYG{n}{plt}\PYG{o}{.}\PYG{n}{xlabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Frequency (Hz)\PYGZsq{}}\PYG{p}{)}
+            \PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Voltage (V)\PYGZsq{}}\PYG{p}{)}
+            \PYG{n}{plt}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{n}{key}\PYG{p}{)}
+            \PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{([}\PYG{n}{args}\PYG{o}{.}\PYG{n}{channel\PYGZus{}1}\PYG{p}{,} \PYG{n}{args}\PYG{o}{.}\PYG{n}{channel\PYGZus{}2}\PYG{p}{])}
+            \PYG{c+c1}{\PYGZsh{}plt.show()}
+        
+        
+
+
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Saving plot to:\PYGZsq{}}\PYG{p}{)}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{saveDir}\PYG{p}{,} \PYG{n}{key}\PYG{p}{[:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{p}{]} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}.png\PYGZsq{}}\PYG{p}{))}
+        \PYG{n}{savePath} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{getcwd}\PYG{p}{()} \PYG{o}{+} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{saveDir}\PYG{p}{,} \PYG{n}{key}\PYG{p}{[:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{p}{]} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}.png\PYGZsq{}}\PYG{p}{)}
+        \PYG{c+c1}{\PYGZsh{}print(savePath)}
+        \PYG{n}{plt}\PYG{o}{.}\PYG{n}{savefig}\PYG{p}{(}\PYG{n}{savePath}\PYG{p}{,} \PYG{n}{dpi} \PYG{o}{=} \PYG{l+m+mi}{600}\PYG{p}{)}
+        \PYG{n}{plt}\PYG{o}{.}\PYG{n}{clf}\PYG{p}{()}
+
+\PYG{k}{def} \PYG{n+nf}{calculate\PYGZus{}THD}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{,} \PYG{n}{freq}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{}calculate Total Harmonic Distortion}
+    \PYG{k}{for} \PYG{n}{key} \PYG{o+ow}{in} \PYG{n}{data\PYGZus{}dict}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{}find a given frequency }
+        \PYG{c+c1}{\PYGZsh{}find to div4 and mult4 because of limited bandwidth}
+        \PYG{c+c1}{\PYGZsh{}frequency = 1000}
+        \PYG{n}{index\PYGZus{}1000} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{freq}\PYG{p}{)}
+        \PYG{n}{freq\PYGZus{}val1} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}1000}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{freq\PYGZus{}val2} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}1000}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{3}\PYG{p}{]}
+        
+        \PYG{n}{index\PYGZus{}div2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{freq}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{)}
+        \PYG{n}{freq\PYGZus{}val1\PYGZus{}div2} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}div2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{freq\PYGZus{}val2\PYGZus{}div2} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}div2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{3}\PYG{p}{]}
+        
+        \PYG{n}{index\PYGZus{}div4} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{freq}\PYG{o}{/}\PYG{l+m+mi}{4}\PYG{p}{)}
+        \PYG{n}{freq\PYGZus{}val1\PYGZus{}div4} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}div4}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{freq\PYGZus{}val2\PYGZus{}div4} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}div4}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{3}\PYG{p}{]}
+        
+        \PYG{n}{index\PYGZus{}mult2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{freq}\PYG{o}{*}\PYG{l+m+mi}{2}\PYG{p}{)}
+        \PYG{n}{freq\PYGZus{}val1\PYGZus{}mult2} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}mult2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{freq\PYGZus{}val2\PYGZus{}mult2} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}mult2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{3}\PYG{p}{]}
+        
+        \PYG{n}{index\PYGZus{}mult3} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{freq}\PYG{o}{*}\PYG{l+m+mi}{3}\PYG{p}{)}
+        \PYG{n}{freq\PYGZus{}val1\PYGZus{}mult3} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}mult3}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{freq\PYGZus{}val2\PYGZus{}mult3} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}mult3}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{3}\PYG{p}{]}
+        
+        \PYG{n}{index\PYGZus{}mult4} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][:,}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{freq}\PYG{o}{*}\PYG{l+m+mi}{4}\PYG{p}{)}
+        \PYG{n}{freq\PYGZus{}val1\PYGZus{}mult4} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}mult4}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{1}\PYG{p}{]}
+        \PYG{n}{freq\PYGZus{}val2\PYGZus{}mult4} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{n}{index\PYGZus{}mult4}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{l+m+mi}{3}\PYG{p}{]}
+        
+        
+        \PYG{n}{zero} \PYG{o}{=} \PYG{n}{data\PYGZus{}dict}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{]}
+        \PYG{c+c1}{\PYGZsh{}sum of Val 2}
+        \PYG{n}{sum\PYGZus{}val2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{freq\PYGZus{}val2\PYGZus{}div2}\PYG{p}{)}\PYG{o}{**}\PYG{l+m+mi}{2} \PYG{o}{+} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{freq\PYGZus{}val2\PYGZus{}div4}\PYG{p}{)}\PYG{o}{**}\PYG{l+m+mi}{2} \PYG{o}{+} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{freq\PYGZus{}val2\PYGZus{}mult2}\PYG{p}{)}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{o}{+} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{freq\PYGZus{}val2\PYGZus{}mult3}\PYG{p}{)}\PYG{o}{**}\PYG{l+m+mi}{2} \PYG{o}{+} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{freq\PYGZus{}val2\PYGZus{}mult4}\PYG{p}{)}\PYG{o}{**}\PYG{l+m+mi}{2}
+        
+        \PYG{n}{thd} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{sum\PYGZus{}val2}\PYG{p}{)}\PYG{o}{/}\PYG{n}{freq\PYGZus{}val2}
+        \PYG{n}{thd2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{sum\PYGZus{}val2}\PYG{o}{+}\PYG{n}{zero}\PYG{p}{)}\PYG{o}{/}\PYG{n}{freq\PYGZus{}val2}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s1}{\PYGZsq{}THD for }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{key}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{ is }\PYG{l+s+si}{\PYGZob{}}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{thd}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZpc{} or }\PYG{l+s+si}{\PYGZob{}}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{thd2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZpc{}\PYGZsq{}}\PYG{p}{)}
+        
+
+        \PYG{c+c1}{\PYGZsh{}print(f\PYGZsq{}Index of \PYGZob{}freq\PYGZcb{} is \PYGZob{}index\PYGZus{}1000\PYGZcb{} and has value \PYGZob{}freq\PYGZus{}val1\PYGZcb{} and \PYGZob{}freq\PYGZus{}val2\PYGZcb{}\PYGZsq{})}
+
+
+\PYG{c+c1}{\PYGZsh{}main function}
+\PYG{k}{def} \PYG{n+nf}{main}\PYG{p}{():}
+    \PYG{n}{args} \PYG{o}{=} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{parse\PYGZus{}args}\PYG{p}{()}
+    
+    \PYG{c+c1}{\PYGZsh{}Command\PYGZhy{}line arguments}
+    \PYG{k}{if} \PYG{n}{args}\PYG{o}{.}\PYG{n}{file}\PYG{p}{:}
+        \PYG{n}{spectrum\PYGZus{}files} \PYG{o}{=} \PYG{p}{[}\PYG{n}{args}\PYG{o}{.}\PYG{n}{file}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{}Get the spectrum files}
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{args}\PYG{o}{.}\PYG{n}{file}\PYG{p}{:}
+        \PYG{n}{spectrum\PYGZus{}files} \PYG{o}{=} \PYG{n}{find\PYGZus{}spectrum\PYGZus{}files}\PYG{p}{()}
+
+    \PYG{c+c1}{\PYGZsh{}\PYGZsh{}Collect data from the spectrum files}
+    \PYG{n}{data\PYGZus{}dict} \PYG{o}{=} \PYG{n}{get\PYGZus{}spectrum\PYGZus{}data}\PYG{p}{(}\PYG{n}{spectrum\PYGZus{}files}\PYG{p}{)}
+
+    \PYG{k}{if} \PYG{n}{args}\PYG{o}{.}\PYG{n}{THD}\PYG{p}{:}
+        \PYG{n}{calculate\PYGZus{}THD}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{)}
+        \PYG{k}{return}
+    
+    \PYG{n}{save\PYGZus{}spectrum\PYGZus{}plot}\PYG{p}{(}\PYG{n}{data\PYGZus{}dict}\PYG{p}{,} \PYG{n}{args}\PYG{p}{)}
+    
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZsq{}}\PYG{p}{:}
+    \PYG{n}{main}\PYG{p}{()}
+\end{Verbatim}

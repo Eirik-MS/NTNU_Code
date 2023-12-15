@@ -1,11 +1,16 @@
 \babel@toc {norsk}{}\relax 
 \contentsline {section}{\numberline {1}Problembeskrivelse}{2}{section.1}%
 \contentsline {section}{\numberline {2}Prinsipiell løsning}{3}{section.2}%
-\contentsline {section}{\numberline {3}Realisering}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Kretsopkobling}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Målinger}{5}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Forbedringer}{5}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Konklusjon}{6}{section.4}%
-\contentsline {section}{\numberline {5}Takk}{6}{section.5}%
-\contentsline {section}{Referanser}{7}{section*.8}%
-\contentsline {section}{\numberline {A}Fullstendige utregninger}{8}{appendix.A}%
+\contentsline {subsection}{\numberline {2.1}Kretstopologi}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Forsterkning}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Total harmonisk distorsjon}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Åpen Løkke forsterkning}{4}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Realisering}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Kretsopkobling}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Målinger}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Diskusjon av måleresultater}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Forbedringer}{7}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Konklusjon}{8}{section.4}%
+\contentsline {section}{\numberline {5}Takk}{8}{section.5}%
+\contentsline {section}{Referanser}{9}{section*.11}%
+\contentsline {section}{\numberline {A}Python script for utregning}{10}{appendix.A}%

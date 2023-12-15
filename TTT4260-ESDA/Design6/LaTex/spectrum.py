@@ -84,6 +84,7 @@ def calculate_THD(data_dict, freq):
     #calculate Total Harmonic Distortion
     for key in data_dict:
         #find a given frequency 
+        #find to div4 and mult4 because of limited bandwidth
         #frequency = 1000
         index_1000 = np.where(data_dict[key][:,0] == freq)
         freq_val1 = data_dict[key][index_1000[0],1]
