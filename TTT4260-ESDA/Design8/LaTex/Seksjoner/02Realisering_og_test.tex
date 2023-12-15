@@ -4,7 +4,7 @@
 
 \subsection{Hvit støy}
 \label{hvitStoeoy}
-For å realisere LFSRen ble det benyttet en FPGA av typen Latrice ice40, og lagd et shift register med 32 D-vipper. inngangen til den føreste D-vippen ble koblet til XOR porter som hadde inngangene koblet til utgangen av D-vippe nummer 1, 5, 6 og 31 som ambefalt av Max Maxfield \cite{LFSR}. For å iverksette LFSRen ble en knapp koblet opp til ingangen til den første D-vippen ved hjelp av en OR port. Diagramet for LFSRen kan sees i figur \ref{fig:LFSRdiagram}
+For å realisere LFSRen ble det benyttet en FPGA av typen Latrice ice40, og lagd et shift register med 32 D-vipper. inngangen til den føreste D-vippen ble koblet til XOR porter som hadde inngangene koblet til utgangen av D-vippe nummer 1, 5, 6 og 31 som ambefalt av Max Maxfield \cite{LFSR}. Med denne konfigurasjonen vil signalet gjenta seg selv etter ca 4.3 milliarder klokkesykluser, noe som vil være godt innenfor dette prosjektes designkrav om et pseudo tilfeldig signal. For å iverksette LFSRen ble en knapp koblet opp til ingangen til den første D-vippen ved hjelp av en OR port. Diagramet for LFSRen kan sees i figur \ref{fig:LFSRdiagram}
 % og koden kan sees i vedlegg \ref{LFSRkode}.
 
 \begin{figure} [!h]
@@ -16,7 +16,7 @@ For å realisere LFSRen ble det benyttet en FPGA av typen Latrice ice40, og lagd
 
 \subsection{Aktivt filter}
 \label{aktivtFilterRealisering}
-Dette designet er tiltenkt fungere som et båndpassfilter med tiltenkt senterfrekvens på 3000Hz. Det ble regnet ut verdier ved å benytte likninge som beskrevet i \autoref{aktivtFilter} og disse verdiene ble brukt til å sette opp kretsen i figur \ref{fig:SallenKey}. Verdiene som ble benyttet kan ses i tabell \ref{tab:filterVerdier}.
+Dette designet er tiltenkt fungere som et båndpassfilter med tiltenkt senterfrekvens på 3000Hz. Det ble regnet ut verdier ved å benytte likninge som beskrevet i \autoref{aktivtFilter} og disse verdiene ble brukt til å sette opp kretsen i figur \ref{fig:SallenKey}. Verdiene som ble benyttet kan ses i tabell \ref{tab:filterVerdier}. For å realisere dette som et båndpassfilter ble Delyiannis-Friend topologien som nevnt tidligere realisert som vist i \autoref{fig:realisertFilter}.
 
 \begin{table}[H]
     \centering
@@ -28,12 +28,64 @@ Dette designet er tiltenkt fungere som et båndpassfilter med tiltenkt senterfre
     Teoretisk verdi & \SI{53}{\kilo\ohm} & \SI{266}{\Omega} & \SI{100}{\kilo\ohm} & \SI{10}{\nano\farad} & \SI{10}{\nano\farad} \\ \hline
     Realisert verdi & \SI{53}{\kilo\ohm} & \SI{240}{\Omega} & \SI{99.9}{\kilo\ohm}  & \SI{10}{\nano\farad} & \SI{10}{\nano\farad} \\ \hline
     \end{tabular}
-\end{table}   
+\end{table}  
 \newpage
+
+
+
+\begin{figure}[H]
+    \centering
+    \resizebox{0.6\textwidth}{!}{%
+    \begin{circuitikz}
+    \tikzstyle{every node}=[font=\LARGE]
+    \draw 
+     (6.75,15.25) to[R] (8.75,15.25) %R1
+
+     (8.75,15.25) to[R] (8.75,13.25) %R2
+     (8.75,13.25) to (8.75,13.25) node[ground]{}
+
+     (8.75,15.25) to[C] (10.75,15.25) %C1
+
+     (13,14.75) node[op amp,scale=1, yscale=-1 ] (opamp2) {}
+     (opamp2.+) to[short] (11.5,15.25)
+     (opamp2.-) to[short] (11.5,14.25)
+     (14.2,14.75) to[short](14.5,14.75)
+     
+     [](11.5,14.25) to[short] (11.5,13.25)
+     (11.5,13.25) to (11.5,13.25) node[ground]{}
+
+     (8.75,17.75) to[C] (14,17.75) %C2
+     [](14,14.75) to[short] (14,17.75)
+     [](8.75,15.25) to[short] (8.75,17.75)
+
+     (10.75,16.5) to[R] (14,16.5) %R3
+     [](10.75,15.25) to[short] (10.75,16.5)
+     
+
+     [](10.75,15.25) to[short] (11.5,15.25)
+     [](14.5,14.75) to[short, -o] (15,14.75)
+     [](6.75,15.25) to[short, -o] (6.25,15.25)
+     (8.75,15.25) to[short, -*] (8.75,15.25)
+     (10.75,15.25) to[short, -*] (10.75,15.25)
+     (14,14.75) to[short, -*] (14,14.75)
+     ;
+     \node [font=\large] at (15,14.25) {$y(t)$};
+     \node [font=\large] at (6.25,14.75) {$s(t)$};
+     \node [font=\large] at (7.75,15.75) {$R_1$};
+     \node [font=\large] at (9.75,16) {$C_2$};
+     \node [font=\large] at (11.25,18.5) {$C_1$};
+     \node [font=\large] at (9.25,14.25) {$R_2$};
+     \node [font=\large] at (12.5,17) {$R_3$};
+
+    \end{circuitikz}
+    }%
+    \caption{Delyiannis-Friend filter.}
+    \label{fig:realisertFilter}
+    \end{figure}
 
 \subsection{Test}
 \label{test}
-For å teste om filteret fungerete ble det først gjort en network analyse på filteret i seg selv. Dette ble gjort ved å benytte et signalgenerator og en oscilloskop. Signalet som ble generert var en sinusbølge med frekvenser fra 0 til 10kHz. Testresultatet kan ses i figur \ref{fig:filterTest}.
+For å teste om filteret fungerete ble det først gjort en network analyse på filteret i seg selv for å finne amplituderesponsen til systemet. Dette ble gjort ved å benytte et signalgenerator og en oscilloskop. Signalet som ble generert var en sinusbølge med frekvenser fra 0 til 10kHz. Testresultatet kan ses i figur \ref{fig:filterTest}.
 
 \begin{figure} [!h]
 \centering
