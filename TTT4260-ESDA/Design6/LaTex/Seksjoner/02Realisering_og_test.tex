@@ -44,7 +44,7 @@ Den oppkoblede kretsen vises i \autoref{fig:diffamp_realisert}.
 
 \clearpage
 \subsection{Målinger}
-Det ble gjort målinger med ocilioskop og spektrumsanalysator, derretter ble målingene prosesert i python for å finne THD og forsterkning. Målingene ble gjort med en inngangsamplitude på 0.04V og en frekvens på 1kHz. Resultatene av målingene vises i tabell \autoref{tab:THD_and_Amplitude_Data}. Ut av tabellen kan vi se at forsterkningen varierer mye når vi ikke har tilbakekobling på utgangen og når vi setter på en lav lastmotstand så synker forsterkningen kraftig. Spektrumsanalysen av utgagnssignalet med last på $R_L = 100k\Omega$ både med og uten tilbakekobling vises i figur \autoref{fig:Spectrum_OPAMP_1_tilbake_100KOhm} og i figur \autoref{fig:Spectrum_OPAMP_1_100KOhm}. 
+Det ble gjort målinger med ocilioskop og spektrumsanalysator, derretter ble målingene prosesert i python for å finne THD og forsterkning. Koden som ble brukt ligger i Vedlegg \ref{ax:py}. Målingene ble gjort med en inngangsamplitude på 0.04V og en frekvens på 1kHz. Resultatene av målingene vises i tabell \autoref{tab:THD_and_Amplitude_Data}. Ut av tabellen kan vi se at forsterkningen varierer mye når vi ikke har tilbakekobling på utgangen og når vi setter på en lav lastmotstand så synker forsterkningen kraftig. Spektrumsanalysen av utgagnssignalet med last på $R_L = 100k\Omega$ både med og uten tilbakekobling vises i figur \autoref{fig:Spectrum_OPAMP_1_tilbake_100KOhm} og i figur \autoref{fig:Spectrum_OPAMP_1_100KOhm}. 
 %Vi ser at THD er mye lavere med tilbakekobling enn uten. Dette er fordi tilbakekoblingen reduserer forsterkningen, og dermed reduseres også forsterkningen av harmoniske signaler.
 
 \begin{table}[h!]
@@ -102,6 +102,8 @@ Det som står mest ut blant målingene er de store frekvenskoponentene rett ved 
         \label{fig:ocilloskop_data_tilbake}
     \end{minipage}
 \end{figure}
+
+Som vi også leser lett ut av tabellen over så blir THD vesentlig mye høyere når vi ikke har tilbakekobling på utgangen og lav lastmotstand. Dette er fordi kretsen ikke klarer å drive en så lav lastmotstand fordi den vil trekke mer strøm en systemet klarer å levere så den klarer ikke beholde de ideelee karakteristikkene. 
 
 
 \subsection{Forbedringer}

@@ -11,6 +11,5 @@
 \contentsline {subsection}{\numberline {3.3}Diskusjon av måleresultater}{6}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Forbedringer}{7}{subsection.3.4}%
 \contentsline {section}{\numberline {4}Konklusjon}{8}{section.4}%
-\contentsline {section}{\numberline {5}Takk}{8}{section.5}%
 \contentsline {section}{Referanser}{9}{section*.11}%
 \contentsline {section}{\numberline {A}Python script for utregning}{10}{appendix.A}%
